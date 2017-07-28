@@ -61,7 +61,7 @@
 				<img id="compania" src="/logo.png" alt="">
 			</div>
 			<div class="hidden-xs col-sm-6 col-md-6 col-lg-6">
-				<h1>Sistema Integral de Operaciones NetworkSoft &reg;</h1>
+				<h1>Plataforma Franchise One &reg;</h1>
 			</div>
 		</header>
 
@@ -162,7 +162,7 @@
 				background: #fff !important;
 
 			}
-			#compania{width: 80%; margin: -10px auto;}
+			#compania{width: 75%; margin: -20px auto;}
 			#header h1{margin-top: -5px;font-weight: bold !important;}
 			header h2{text-align: center; color: rgb(41, 124, 255) ;font-weight: bold !important;font-size: 2em;}
 			#login-form{

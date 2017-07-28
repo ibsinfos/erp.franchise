@@ -353,17 +353,18 @@ class configuracion extends CI_Controller
 		$this->template->set_partial('footer', 'website/bo/footer');
 		$this->template->build('website/bo/empresa/banner');
 	}
+	
 	function crear_banner(){
 		$error="";
 		$id = $this->tank_auth->get_user_id();
 		$ruta="/media/Empresa/";
-		$error=$error+$img;
+		
 		//definimos la ruta para subir la imagen
 		$config['upload_path'] 		= getcwd().$ruta;
 		$config['allowed_types'] 	= 'gif|jpg|png|jpeg|png';
 		$config['max_width']  		= '4096';
 		$config['max_height']   	= '3112';
-	
+		
 		//Cargamos la libreria con las configuraciones de arriba
 		$this->load->library('upload', $config);
 		//Preguntamos si se pudo subir el archivo "foto" es el nombre del input del dropzone
@@ -371,22 +372,22 @@ class configuracion extends CI_Controller
 		if (!$this->upload->do_upload('img'))
 		{
 			$this->model_admin->banner_modificacion();
-			//$error = "El tipo de archivo que esta cargando no esta permitido como imagen para el banner.";
-			//$this->session->set_flashdata('error', $error);
-			//redirect('/bo/configuracion/banner');
+			$error = "El tipo de archivo que esta cargando no esta permitido como imagen para el banner.";
+			$this->session->set_flashdata('error', $error);
+			redirect('/bo/configuracion/banner');
 		}
 		else
 		{
-		$consulta_img=$this->model_admin->img_banner();
-		unlink(getcwd().$ruta.$consulta_img[0]->nombre_banner);
+			$consulta_img=$this->model_admin->img_banner();
+			unlink(getcwd().$ruta.$consulta_img[0]->nombre_banner);
 			$data = array('upload_data' => $this->upload->data());
 			$sku = $this->model_admin->modificar_banner($data["upload_data"]["file_name"]);
 			//$this->model_mercancia->img_merc($sku , $data["upload_data"]);
 		}
-
-			$error = "Se ha modificado el banner.";
-			$this->session->set_flashdata('error', $error);
-			redirect('/bo/configuracion/banner');
+		
+		$error = "Se ha modificado el banner.";
+		$this->session->set_flashdata('error', $error);
+		redirect('/bo/configuracion/banner');
 	}
 	
 	function entorno()

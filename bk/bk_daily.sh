@@ -1,7 +1,7 @@
 #!/bin/bash
 #echo "creando dump";
-#dir=$DIRSTACK"/erp.multinivel/bk/";
-dir=$HOME"/html/test/bk/";
+#dir=$DIRSTACK"/erp.franchise/bk/";
+dir=$HOME"/html/erp.franchise/bk/";
 hostname=$1;
 username=$2;
 password=$3;
