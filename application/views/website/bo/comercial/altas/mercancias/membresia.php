@@ -95,13 +95,13 @@
 													<section class="col col-2">
 														<label class="input">
 														Costo distribuidores
-														<input required type="number" min="1" name="costo" id="costo" onchange="calcular_precio_total()" required >
+														<input required type="number" step="0.01" min="0.01" name="costo" id="costo" onchange="calcular_precio_total()" required >
 														</label>
 													</section>			
 													<section class="col col-3">
 														<label class="input">
 														Puntos comisionables
-															<input type="number" min="0" max="" name="puntos_com" id="puntos_com" required>
+															<input type="number" step="0.01" min="0.00" max="" name="puntos_com" id="puntos_com" required>
 														</label>
 													</section>
 													<legend>Impuestos</legend>

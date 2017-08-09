@@ -71,7 +71,8 @@ class model_mercancia extends CI_Model {
 		$sku_2 = $nombre_ini . $sku . $_POST ['tipo_mercancia'];
 		
 		$mercancia = $this->CrearMercancia ( $sku, $sku_2, $_POST ['tipo_mercancia'], $_POST ['pais'], 0, 0, $_POST ['costo'], '0', 0, $_POST ['puntos_com'], $iva, $_POST['descuento'] );
-		$this->ingresarimpuestos ( $_POST ['id_impuesto'], $mercancia );
+		$id_impuesto = isset($_POST ['id_impuesto']) ? $_POST ['id_impuesto'] : 0;
+        $this->ingresarimpuestos ( $id_impuesto, $mercancia );
 		return $mercancia;	
 	}
 	function nuevo_producto() {
@@ -457,7 +458,8 @@ class model_mercancia extends CI_Model {
 	}
 	
 	function ingresarimpuestos($impuestos, $mercancia) {
-		if (isset($impuestos)){
+	    $isImpuesto = isset($impuestos)&&gettype($impuestos)=="array";
+        if ($isImpuesto){
 			foreach ( $impuestos as $impuesto ) {
 				$dato_impuesto = array (
 						"id_mercancia" => $mercancia,
