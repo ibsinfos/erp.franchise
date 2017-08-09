@@ -21,7 +21,7 @@ CREATE TABLE `afiliar` (
   `directo` int(11) NOT NULL,
   `lado` varchar(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -30,7 +30,7 @@ CREATE TABLE `afiliar` (
 
 LOCK TABLES `afiliar` WRITE;
 /*!40000 ALTER TABLE `afiliar` DISABLE KEYS */;
-INSERT INTO `afiliar` VALUES (2,1,2,1,1,'0');
+INSERT INTO `afiliar` VALUES (2,1,2,1,1,'0'),(3,1,8,2,2,'0');
 /*!40000 ALTER TABLE `afiliar` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,7 +255,7 @@ CREATE TABLE `billetera` (
 
 LOCK TABLES `billetera` WRITE;
 /*!40000 ALTER TABLE `billetera` DISABLE KEYS */;
-INSERT INTO `billetera` VALUES (2,'0','ACT','si');
+INSERT INTO `billetera` VALUES (2,'0','ACT','si'),(8,NULL,'DES','No');
 /*!40000 ALTER TABLE `billetera` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -848,7 +848,7 @@ CREATE TABLE `cat_img` (
   `extencion` varchar(6) NOT NULL,
   `estatus` varchar(3) NOT NULL,
   PRIMARY KEY (`id_img`)
-) ENGINE=InnoDB AUTO_INCREMENT=647 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=655 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -857,7 +857,7 @@ CREATE TABLE `cat_img` (
 
 LOCK TABLES `cat_img` WRITE;
 /*!40000 ALTER TABLE `cat_img` DISABLE KEYS */;
-INSERT INTO `cat_img` VALUES (3,'/media/2/user.png','user.png','user','png','ACT'),(645,'/media/carrito/Membrete1.png','Membrete1.png','Membrete1','png','ACT'),(646,'/media/carrito/m3.jpg','m3.jpg','m3','jpg','ACT');
+INSERT INTO `cat_img` VALUES (3,'/media/2/user.jpg','user.jpg','user','jpg','ACT'),(647,'/template/img/empresario.jpg','empresario.jpg','empresario','jpg','ACT'),(648,'/media/carrito/bronce.jpg','bronce.jpg','bronce','jpg','ACT'),(649,'/media/carrito/bronce1.jpg','bronce1.jpg','bronce1','jpg','ACT'),(650,'/media/carrito/bronce2.jpg','bronce2.jpg','bronce2','jpg','ACT'),(651,'/media/carrito/platino.jpg','platino.jpg','platino','jpg','ACT'),(652,'/media/carrito/plata.jpg','plata.jpg','plata','jpg','ACT'),(653,'/media/carrito/oro.jpg','oro.jpg','oro','jpg','ACT'),(654,'/media/carrito/premium.jpg','premium.jpg','premium','jpg','ACT');
 /*!40000 ALTER TABLE `cat_img` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1822,7 +1822,7 @@ CREATE TABLE `coaplicante` (
   `apellido` varchar(60) NOT NULL,
   `keyword` varchar(20) NOT NULL,
   PRIMARY KEY (`id_coaplicante`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1831,6 +1831,7 @@ CREATE TABLE `coaplicante` (
 
 LOCK TABLES `coaplicante` WRITE;
 /*!40000 ALTER TABLE `coaplicante` DISABLE KEYS */;
+INSERT INTO `coaplicante` VALUES (1,8,'','','');
 /*!40000 ALTER TABLE `coaplicante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2268,7 +2269,7 @@ CREATE TABLE `cometchat_status` (
 
 LOCK TABLES `cometchat_status` WRITE;
 /*!40000 ALTER TABLE `cometchat_status` DISABLE KEYS */;
-INSERT INTO `cometchat_status` VALUES (2,NULL,'available',NULL,NULL,1,1455855327),(3,NULL,'away',NULL,NULL,0,1438445135),(4,NULL,'away',NULL,NULL,0,1438445096),(7,NULL,'available',NULL,NULL,1,1422044968),(18,NULL,'away',NULL,NULL,0,1443624749),(19,NULL,'available',NULL,NULL,0,1443625663),(21,NULL,'away',NULL,NULL,0,1445708744),(23,NULL,NULL,NULL,NULL,0,1443625353),(51,NULL,NULL,NULL,NULL,0,1445702756),(57,NULL,'available',NULL,NULL,1,1436565888),(90,NULL,NULL,NULL,NULL,0,1452213027),(100,NULL,'away',NULL,NULL,0,1452213401),(101,NULL,'available',NULL,NULL,0,1452300230),(102,NULL,'available',NULL,NULL,0,1452288616),(103,NULL,'available',NULL,NULL,0,1452300811),(104,NULL,'available',NULL,NULL,0,1452300181),(109,NULL,NULL,NULL,NULL,0,1453306792),(161,NULL,'',NULL,NULL,1,1436562648),(172,NULL,'',NULL,NULL,1,1436562779);
+INSERT INTO `cometchat_status` VALUES (2,NULL,'available',NULL,NULL,1,1502159965),(3,NULL,'away',NULL,NULL,0,1438445135),(4,NULL,'away',NULL,NULL,0,1438445096),(7,NULL,'available',NULL,NULL,1,1422044968),(18,NULL,'away',NULL,NULL,0,1443624749),(19,NULL,'available',NULL,NULL,0,1443625663),(21,NULL,'away',NULL,NULL,0,1445708744),(23,NULL,NULL,NULL,NULL,0,1443625353),(51,NULL,NULL,NULL,NULL,0,1445702756),(57,NULL,'available',NULL,NULL,1,1436565888),(90,NULL,NULL,NULL,NULL,0,1452213027),(100,NULL,'away',NULL,NULL,0,1452213401),(101,NULL,'available',NULL,NULL,0,1452300230),(102,NULL,'available',NULL,NULL,0,1452288616),(103,NULL,'available',NULL,NULL,0,1452300811),(104,NULL,'available',NULL,NULL,0,1452300181),(109,NULL,NULL,NULL,NULL,0,1453306792),(161,NULL,'',NULL,NULL,1,1436562648),(172,NULL,'',NULL,NULL,1,1436562779);
 /*!40000 ALTER TABLE `cometchat_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2491,6 +2492,36 @@ LOCK TABLES `compras_reportes` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `compropago`
+--
+
+DROP TABLE IF EXISTS `compropago`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `compropago` (
+  `email` varchar(100) NOT NULL DEFAULT 'you@domain.com',
+  `pk_test` varchar(255) DEFAULT 'pk_test',
+  `sk_test` varchar(255) DEFAULT 'sk_test',
+  `pk_live` varchar(255) DEFAULT 'pk_live',
+  `sk_live` varchar(255) DEFAULT 'sk_live',
+  `moneda` varchar(45) NOT NULL DEFAULT 'MXN',
+  `test` int(11) NOT NULL DEFAULT '1',
+  `estatus` varchar(3) NOT NULL DEFAULT 'DES',
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `compropago`
+--
+
+LOCK TABLES `compropago` WRITE;
+/*!40000 ALTER TABLE `compropago` DISABLE KEYS */;
+INSERT INTO `compropago` VALUES ('you@domain.com','pk_test','sk_test','pk_live','sk_live','MXN',1,'DES');
+/*!40000 ALTER TABLE `compropago` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `country`
 --
 
@@ -2699,7 +2730,7 @@ CREATE TABLE `cross_dir_user` (
 
 LOCK TABLES `cross_dir_user` WRITE;
 /*!40000 ALTER TABLE `cross_dir_user` DISABLE KEYS */;
-INSERT INTO `cross_dir_user` VALUES (2,'sadasd','','','','','BOL');
+INSERT INTO `cross_dir_user` VALUES (2,'sadasd','','','','','BOL'),(8,'','','','','','ABW');
 /*!40000 ALTER TABLE `cross_dir_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2810,7 +2841,7 @@ CREATE TABLE `cross_img_user` (
 
 LOCK TABLES `cross_img_user` WRITE;
 /*!40000 ALTER TABLE `cross_img_user` DISABLE KEYS */;
-INSERT INTO `cross_img_user` VALUES (2,3);
+INSERT INTO `cross_img_user` VALUES (2,3),(8,647);
 /*!40000 ALTER TABLE `cross_img_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2872,7 +2903,7 @@ CREATE TABLE `cross_merc_img` (
   `id_mercancia` int(11) NOT NULL,
   `id_cat_imagen` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2881,7 +2912,7 @@ CREATE TABLE `cross_merc_img` (
 
 LOCK TABLES `cross_merc_img` WRITE;
 /*!40000 ALTER TABLE `cross_merc_img` DISABLE KEYS */;
-INSERT INTO `cross_merc_img` VALUES (1,1,645),(2,2,646);
+INSERT INTO `cross_merc_img` VALUES (1,1,650),(3,1,650),(4,2,649),(5,3,651),(6,4,652),(7,5,653),(8,6,654);
 /*!40000 ALTER TABLE `cross_merc_img` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2904,7 +2935,6 @@ CREATE TABLE `cross_merc_impuesto` (
 
 LOCK TABLES `cross_merc_impuesto` WRITE;
 /*!40000 ALTER TABLE `cross_merc_impuesto` DISABLE KEYS */;
-INSERT INTO `cross_merc_impuesto` VALUES (1,2),(2,2);
 /*!40000 ALTER TABLE `cross_merc_impuesto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2978,7 +3008,7 @@ CREATE TABLE `cross_perfil_usuario` (
 
 LOCK TABLES `cross_perfil_usuario` WRITE;
 /*!40000 ALTER TABLE `cross_perfil_usuario` DISABLE KEYS */;
-INSERT INTO `cross_perfil_usuario` VALUES (1,1),(2,2);
+INSERT INTO `cross_perfil_usuario` VALUES (1,1),(2,2),(8,2);
 /*!40000 ALTER TABLE `cross_perfil_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3105,6 +3135,7 @@ CREATE TABLE `cross_rango_user` (
 
 LOCK TABLES `cross_rango_user` WRITE;
 /*!40000 ALTER TABLE `cross_rango_user` DISABLE KEYS */;
+INSERT INTO `cross_rango_user` VALUES (8,1,'2017-08-08 07:23:53',1,'ACT');
 /*!40000 ALTER TABLE `cross_rango_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3153,7 +3184,7 @@ CREATE TABLE `cross_tel_user` (
 
 LOCK TABLES `cross_tel_user` WRITE;
 /*!40000 ALTER TABLE `cross_tel_user` DISABLE KEYS */;
-INSERT INTO `cross_tel_user` VALUES (2,1,'','ACT'),(2,2,'','ACT');
+INSERT INTO `cross_tel_user` VALUES (2,1,'','ACT'),(2,2,'','ACT'),(8,1,'','ACT'),(8,2,'','ACT');
 /*!40000 ALTER TABLE `cross_tel_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3186,7 +3217,7 @@ CREATE TABLE `cross_user_banco` (
 
 LOCK TABLES `cross_user_banco` WRITE;
 /*!40000 ALTER TABLE `cross_user_banco` DISABLE KEYS */;
-INSERT INTO `cross_user_banco` VALUES (1,2,'Your Card','You','Your Bank','PER','','',0,0,'ACT');
+INSERT INTO `cross_user_banco` VALUES (1,2,'Your Card','You','Your Bank','BOL','','',0,0,'ACT');
 /*!40000 ALTER TABLE `cross_user_banco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3439,7 +3470,7 @@ CREATE TABLE `emails_departamentos` (
   `email` text,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3448,7 +3479,7 @@ CREATE TABLE `emails_departamentos` (
 
 LOCK TABLES `emails_departamentos` WRITE;
 /*!40000 ALTER TABLE `emails_departamentos` DISABLE KEYS */;
-INSERT INTO `emails_departamentos` VALUES ('Pagos','pagos@franchiseone.net',41),('Contacto','contacto@franchiseone.net',42),('','',43),('','',44),('','',45),('','',46),('','',47),('','',48),('','',49),('','',50);
+INSERT INTO `emails_departamentos` VALUES ('Pagos','pagos@franchiseone.net',51),('Contacto','contacto@franchiseone.net',52),('soporte','soporte@franchiseone.net',53),('','',54),('','',55),('','',56),('','',57),('','',58),('','',59),('','',60);
 /*!40000 ALTER TABLE `emails_departamentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3713,7 +3744,7 @@ CREATE TABLE `estilo_usuario` (
   `btn_1_color` varchar(30) NOT NULL,
   `btn_2_color` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3722,7 +3753,7 @@ CREATE TABLE `estilo_usuario` (
 
 LOCK TABLES `estilo_usuario` WRITE;
 /*!40000 ALTER TABLE `estilo_usuario` DISABLE KEYS */;
-INSERT INTO `estilo_usuario` VALUES (1,1,'#05BDBF','#6D706D','#05BDBF'),(2,2,'#05bdbf','#05bdbf','#6d706d');
+INSERT INTO `estilo_usuario` VALUES (1,1,'#05BDBF','#6D706D','#05BDBF'),(2,2,'#408080','#408080','#6d706d'),(3,8,'#05BDBF','#6D706D','#05BDBF');
 /*!40000 ALTER TABLE `estilo_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3916,7 +3947,7 @@ CREATE TABLE `login_attempts` (
   `login` varchar(50) COLLATE utf8_bin NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3967,7 +3998,7 @@ CREATE TABLE `membresia` (
   `descripcion` text NOT NULL,
   `id_red` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3976,6 +4007,7 @@ CREATE TABLE `membresia` (
 
 LOCK TABLES `membresia` WRITE;
 /*!40000 ALTER TABLE `membresia` DISABLE KEYS */;
+INSERT INTO `membresia` VALUES (1,'Bronce','365','Binario 5%\nPagos 2%',1),(3,'Platino','365','Platino 7,5%\nPagos 2%',1),(4,'Plata','365','Binario 10%\nPagos 2%',1),(5,'Oro','365','Binario 15%\nPagos 2%',1),(6,'Premium','365','Binario 20%\nPagos 2%',1);
 /*!40000 ALTER TABLE `membresia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4032,7 +4064,7 @@ CREATE TABLE `mercancia` (
   `iva` varchar(3) NOT NULL DEFAULT 'CON',
   `descuento` decimal(10,2) DEFAULT '0.00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4041,6 +4073,7 @@ CREATE TABLE `mercancia` (
 
 LOCK TABLES `mercancia` WRITE;
 /*!40000 ALTER TABLE `mercancia` DISABLE KEYS */;
+INSERT INTO `mercancia` VALUES (1,1,'Bro15',5,'BOL','2017-08-09 20:52:33','ACT',0,0.00,0.10,0.00,'0',0.10,'MAS',0.00),(3,3,'Pla35',5,'BOL','2017-08-09 21:01:21','ACT',0,0.00,0.50,0.00,'0',0.50,'MAS',0.00),(4,4,'Pla45',5,'BOL','2017-08-09 21:09:29','ACT',0,0.00,1.00,0.00,'0',1.00,'MAS',0.00),(5,5,'Oro55',5,'BOL','2017-08-09 21:22:44','ACT',0,0.00,2.00,0.00,'0',2.00,'MAS',0.00),(6,6,'Pre65',5,'BOL','2017-08-09 21:24:50','ACT',0,0.00,4.00,0.00,'0',4.00,'MAS',0.00);
 /*!40000 ALTER TABLE `mercancia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5078,7 +5111,7 @@ CREATE TABLE `user_profiles` (
   `estatus` varchar(3) COLLATE utf8_bin DEFAULT 'DES',
   `nivel_en_red` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5087,7 +5120,7 @@ CREATE TABLE `user_profiles` (
 
 LOCK TABLES `user_profiles` WRITE;
 /*!40000 ALTER TABLE `user_profiles` DISABLE KEYS */;
-INSERT INTO `user_profiles` VALUES (1,1,0,0,1,0,0,0,1,1,'1',1,'Admin','','0000-00-00','2017-07-28 08:45:51','ACT',3),(2,2,1,1,2,5,3,1,1,1,'316516165165',1,'Administrador','Oficina Virtual','1980-01-01','2016-10-18 15:10:49','ACT',1);
+INSERT INTO `user_profiles` VALUES (1,1,0,0,1,0,0,0,1,1,'1',1,'Admin','','0000-00-00','2017-08-09 20:14:52','ACT',3),(2,2,1,1,2,5,3,1,1,1,'316516165165',1,'Administrador','Oficina Virtual','1980-01-01','2017-08-09 21:29:58','ACT',1),(8,8,1,1,2,1,1,1,1,1,'76333181',0,'CODIGO','MASTER','1984-07-02','2017-08-08 07:23:53','DES',NULL);
 /*!40000 ALTER TABLE `user_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5104,7 +5137,7 @@ CREATE TABLE `user_red_temporal` (
   `id_red_temporal` varchar(10) DEFAULT NULL,
   `id_red_a_red` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5113,6 +5146,7 @@ CREATE TABLE `user_red_temporal` (
 
 LOCK TABLES `user_red_temporal` WRITE;
 /*!40000 ALTER TABLE `user_red_temporal` DISABLE KEYS */;
+INSERT INTO `user_red_temporal` VALUES (1,'2','1','0');
 /*!40000 ALTER TABLE `user_red_temporal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5190,7 +5224,7 @@ CREATE TABLE `users` (
   `recovery` varchar(65) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `created` (`created`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5199,7 +5233,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'1','$2a$08$nxbGEx.0ODRvsAOcDpqOQOv0t2VIZ2ygWibEgnA9wyxYQjwLhWnii','admin@admin.com',1,0,NULL,NULL,NULL,NULL,NULL,'161.10.15.195','2017-07-28 16:49:00','2015-07-11 00:00:00','2017-07-29 04:49:00','admin1414'),(2,'admin','$2a$08$nxbGEx.0ODRvsAOcDpqOQOv0t2VIZ2ygWibEgnA9wyxYQjwLhWnii','admin@franchiseone.net',1,0,NULL,NULL,NULL,NULL,NULL,'::1','2017-07-27 22:40:20','2015-05-11 00:00:00','2017-07-28 10:45:22','FBNSMX2017');
+INSERT INTO `users` VALUES (1,'1','$2a$08$nxbGEx.0ODRvsAOcDpqOQOv0t2VIZ2ygWibEgnA9wyxYQjwLhWnii','admin@admin.com',1,0,NULL,NULL,NULL,NULL,NULL,'191.109.238.154','2017-08-09 09:31:31','2015-07-11 00:00:00','2017-08-09 21:31:31','FBMXNS2017'),(2,'admin','$2a$08$/jQhYIt4JtV9lMRf3UMNxuqjv1cPt1ExzjrCsJa5EgChlw2k6Qpd6','admin@franchiseone.net',1,0,NULL,NULL,NULL,NULL,NULL,'191.109.238.154','2017-08-09 09:29:58','2015-05-11 00:00:00','2017-08-09 21:29:58','2436SISTEM'),(8,'MASTER','$2a$08$aAxVMMF7qptmX35TaTGJnu1171.sKNKSUp5vcqu0xn8yCSJwqeUOa','marketpaucara1985@gmail.com',1,0,NULL,NULL,NULL,NULL,NULL,'181.114.123.97',NULL,'2017-08-07 19:23:52','2017-08-08 07:23:52','2536SISTEM');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5257,7 +5291,7 @@ CREATE TABLE `users_attempts` (
 
 LOCK TABLES `users_attempts` WRITE;
 /*!40000 ALTER TABLE `users_attempts` DISABLE KEYS */;
-INSERT INTO `users_attempts` VALUES ('127.0.0.1','2016-10-16 00:59:39',1,0),('161.10.15.195','2017-07-28 09:57:12',1,0);
+INSERT INTO `users_attempts` VALUES ('127.0.0.1','2016-10-16 00:59:39',1,0),('161.10.15.195','2017-07-28 09:57:12',1,0),('161.18.33.121','2017-08-07 09:14:41',1,0),('181.114.123.78','2017-07-30 18:30:37',1,0),('181.114.125.100','2017-08-01 05:45:08',1,0),('191.109.238.154','2017-08-09 09:31:22',1,0);
 /*!40000 ALTER TABLE `users_attempts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5353,7 +5387,7 @@ UNLOCK TABLES;
 -- Dumping routines for database 'erpfranchise'
 --
 /*!50003 DROP PROCEDURE IF EXISTS `afiliar` */;
- 
+
 DELIMITER ;;
 CREATE  PROCEDURE `afiliar`(	
 
@@ -5595,12 +5629,14 @@ end if;
 END ;;
 DELIMITER ;
  
+
 --
 -- Final view structure for view `items`
 --
 
 /*!50001 DROP VIEW IF EXISTS `items`*/;
  
-/*!50001 CREATE VIEW `items` AS select `m`.`id` AS `id`,`m`.`sku` AS `sku`,`m`.`puntos_comisionables` AS `puntos_comisionables`,(case when (`m`.`id_tipo_mercancia` = 1) then (select `producto`.`nombre` from `producto` where (`producto`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 2) then (select `servicio`.`nombre` from `servicio` where (`servicio`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 3) then (select `combinado`.`nombre` from `combinado` where (`combinado`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 4) then (select `paquete_inscripcion`.`nombre` from `paquete_inscripcion` where (`paquete_inscripcion`.`id_paquete` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 5) then (select `membresia`.`nombre` from `membresia` where (`membresia`.`id` = `m`.`sku`)) else 'No define' end) AS `item`,(case when (`m`.`id_tipo_mercancia` = 1) then (select `producto`.`id_grupo` from `producto` where (`producto`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 2) then (select `servicio`.`id_red` from `servicio` where (`servicio`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 3) then (select `combinado`.`id_red` from `combinado` where (`combinado`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 4) then (select `paquete_inscripcion`.`id_red` from `paquete_inscripcion` where (`paquete_inscripcion`.`id_paquete` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 5) then (select `membresia`.`id_red` from `membresia` where (`membresia`.`id` = `m`.`sku`)) else '' end) AS `categoria`,(case when (`m`.`id_tipo_mercancia` = 1) then (select `a`.`id_red` from (`producto` `p` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `p`.`id_grupo`) and (`p`.`id` = `m`.`sku`))) when (`m`.`id_tipo_mercancia` = 2) then (select `a`.`id_red` from (`servicio` `s` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `s`.`id_red`) and (`s`.`id` = `m`.`sku`))) when (`m`.`id_tipo_mercancia` = 3) then (select `a`.`id_red` from (`combinado` `o` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `o`.`id_red`) and (`o`.`id` = `m`.`sku`))) when (`m`.`id_tipo_mercancia` = 4) then (select `a`.`id_red` from (`paquete_inscripcion` `q` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `q`.`id_red`) and (`q`.`id_paquete` = `m`.`sku`))) when (`m`.`id_tipo_mercancia` = 5) then (select `a`.`id_red` from (`membresia` `b` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `b`.`id_red`) and (`b`.`id` = `m`.`sku`))) else '' end) AS `red`,`m`.`id_tipo_mercancia` AS `id_tipo_mercancia` from `mercancia` `m` */;
+/*!50001 CREATE  VIEW `items` AS select `m`.`id` AS `id`,`m`.`sku` AS `sku`,`m`.`puntos_comisionables` AS `puntos_comisionables`,(case when (`m`.`id_tipo_mercancia` = 1) then (select `producto`.`nombre` from `producto` where (`producto`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 2) then (select `servicio`.`nombre` from `servicio` where (`servicio`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 3) then (select `combinado`.`nombre` from `combinado` where (`combinado`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 4) then (select `paquete_inscripcion`.`nombre` from `paquete_inscripcion` where (`paquete_inscripcion`.`id_paquete` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 5) then (select `membresia`.`nombre` from `membresia` where (`membresia`.`id` = `m`.`sku`)) else 'No define' end) AS `item`,(case when (`m`.`id_tipo_mercancia` = 1) then (select `producto`.`id_grupo` from `producto` where (`producto`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 2) then (select `servicio`.`id_red` from `servicio` where (`servicio`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 3) then (select `combinado`.`id_red` from `combinado` where (`combinado`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 4) then (select `paquete_inscripcion`.`id_red` from `paquete_inscripcion` where (`paquete_inscripcion`.`id_paquete` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 5) then (select `membresia`.`id_red` from `membresia` where (`membresia`.`id` = `m`.`sku`)) else '' end) AS `categoria`,(case when (`m`.`id_tipo_mercancia` = 1) then (select `a`.`id_red` from (`producto` `p` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `p`.`id_grupo`) and (`p`.`id` = `m`.`sku`))) when (`m`.`id_tipo_mercancia` = 2) then (select `a`.`id_red` from (`servicio` `s` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `s`.`id_red`) and (`s`.`id` = `m`.`sku`))) when (`m`.`id_tipo_mercancia` = 3) then (select `a`.`id_red` from (`combinado` `o` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `o`.`id_red`) and (`o`.`id` = `m`.`sku`))) when (`m`.`id_tipo_mercancia` = 4) then (select `a`.`id_red` from (`paquete_inscripcion` `q` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `q`.`id_red`) and (`q`.`id_paquete` = `m`.`sku`))) when (`m`.`id_tipo_mercancia` = 5) then (select `a`.`id_red` from (`membresia` `b` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `b`.`id_red`) and (`b`.`id` = `m`.`sku`))) else '' end) AS `red`,`m`.`id_tipo_mercancia` AS `id_tipo_mercancia` from `mercancia` `m` */;
  
--- Dump completed on 2017-07-28 20:16:57
+
+-- Dump completed on 2017-08-09 13:07:48
