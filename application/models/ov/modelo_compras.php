@@ -1416,6 +1416,7 @@ where a.id_paquete = e.id_paquete and d.sku= a.id_paquete and d.estatus="ACT" an
 	}
 	
 	function RegistrarPagoBanco($id_usuario, $id_banco, $id_venta, $valor){
+	    
 		$datos = array(
 				'id_usuario' => $id_usuario,
 				'id_banco'	=> $id_banco,
@@ -1423,10 +1424,104 @@ where a.id_paquete = e.id_paquete and d.sku= a.id_paquete and d.estatus="ACT" an
 				'valor'		=> $valor,
 				'estatus'	=> 'DES'
 		);
+		
 		$this->db->insert('cuenta_pagar_banco_historial', $datos);
 		
 		$q = $this->db->query("SELECT * FROM cat_banco where id_banco =".$id_banco);
 		return $q->result();
+	}
+	
+	/**
+	 * Author : qcmarcel
+	 * Last Time : 10-08-2017
+	 * Se enlista y referencia banco tipo boutcher de bitcoin 
+	 * @param $id_banco
+	 * @return $id_banco*/
+	
+	function setBancoBitcoin($id_banco){
+	    
+	    $this->loadBancoBitcoin();
+	    
+	    $query = "SELECT 
+                            @rowid:=@rowid + 1 AS id_banco, id
+                        FROM
+                            mercancia,
+                            (SELECT @rowid:=0) AS init
+                        ORDER BY id";	
+	    
+	    $q = $this->db->query($query);
+		$values = $q->result();    
+		
+		foreach ($values as $value){
+		    if($value->id == $id_banco){
+		        return $value->id_banco;
+		    }
+		}
+	    
+	    return 0;
+	    
+	}
+	
+	/**
+	 * Author : qcmarcel
+	 * Last Time : 10-08-2017
+	 * Se registran los bancos tipo boutcher de bitcoin 
+	 * */
+	
+	function loadBancoBitcoin()
+    {
+        $this->limpiarBancoBitcoin();
+        
+        $query = "SELECT 
+                            m.id id_banco,
+                            e.nombre descripcion,
+                            e.descripcion cuenta,
+                            u.nombre otro,
+                            u.pais id_pais
+                        FROM
+                            mercancia m,
+                            membresia e,
+                            empresa_multinivel u
+                        WHERE
+                            e.id = m.sku AND m.estatus = 'ACT'";
+        
+        $q = $this->db->query($query);
+        $values = $q->result();
+        
+        foreach ($values as $value) {
+            
+            $Code = explode(" ", $value->cuenta);
+            
+            if (sizeof($Code) > 1) {
+                $value->cuenta = 0;
+            }
+            
+            $datos = array(
+                'id_banco' => $value->id_banco,
+                'cuenta' => $value->cuenta,
+                'descripcion' => $value->descripcion,
+                'otro' => $value->otro,
+                'id_pais' => $value->id_pais
+            ); 
+            
+            if($datos)
+                $this->db->insert('cat_banco', $datos);
+            
+        }
+    }
+	
+	/**
+	 * Author : qcmarcel
+	 * Last Time : 10-08-2017
+	 * Se limpia los registros de bancos tipo boutcher de bitcoin
+	 * */
+	
+	function limpiarBancoBitcoin(){
+	    
+	    $query = "TRUNCATE cat_banco";
+	    
+	    $this->db->query($query);
+	    	    
 	}
 	
 	function RegsitrarVentaWebPersonal($id_afiliado, $id_comprador, $id_venta){

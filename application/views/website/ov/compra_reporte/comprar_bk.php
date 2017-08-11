@@ -40,29 +40,8 @@
     <!--/.nav-collapse --> 
 </div>
 <div class="padding-10">
-
-<div class="row">
-
-<div class="pull-left">
-	
-	<img style="height: 8em;  padding: 1rem;" src="/logo.png" alt="">
-
-</div>
-
-<div class="pull-right">
-	
-	<h1 class="font-400">Recibo de pago</h1>
-</div>
-
-
-</div>
-
-
-
-<div class="row">
-	
-	<div class="col-sm-4">
-												
+											<div class="pull-left">
+												<img style="width: 18rem; height: auto; padding: 1rem;" src="/logo.png" alt="">
 				
 												<address>
 													<h4 class="semi-bold"><?=$empresa[0]->nombre?></h4>
@@ -75,7 +54,13 @@
 													<abbr title="Phone">Tel:</abbr>&nbsp;<?=$empresa[0]->fijo?>
 												</address>
 											</div>
-											<div class="col-sm-4">
+											<div class="pull-right">
+												<h1 class="font-400">Recibo de pago</h1>
+											</div>
+											<div class="clearfix"></div>
+											<br>
+											<div class="row">
+												<div class="col-sm-9">
 													<address>
 														<strong>Facturar a:</strong>
 														<br>
@@ -90,9 +75,7 @@
 														<abbr title="Phone">Email:</abbr> <?php echo $datos_afiliado[0]->email;?>
 													</address>
 												</div>
-											<div class="col-sm-4">
-												
-
+												<div class="col-sm-3">
 
 													<div>
 														<div class="font-md">
@@ -118,15 +101,6 @@
 														</div>
 													</div>
 												</div>
-
-
-</div>
-											
-											<div class="clearfix"></div>
-											<br>
-											<div class="row">
-												
-												
 											</div>
 																							<div class="panel panel-default">
   													<div class="panel-body">
@@ -236,14 +210,36 @@
 												<div class="row">
 				
 													<div class="col-sm-8">
-
-													<p class="note">**Para evitar cargos por exceso de penalización , por favor, hacer pagos dentro de los 30 días siguientes a la fecha de vencimiento. Habrá un cargo de interés del 2 % mensual sobre todas las facturas finales.</p>
-														
+														<div class="payment-methods">
+															<h1 class="font-300">Metodos de Pago</h1>
+															<a onclick="consignacion()" style="margin-left: 1rem;" class="btn btn-success txt-color-blueLight">
+																<img src="/template/img/payment/deposito-bancario.jpg" alt="Banco" height="60" width="240">
+															</a>
+															<?php if($payulatam[0]->estatus=='ACT') {?>
+															<a onclick="payuLatam()" style="margin-left: 1rem;" class="btn btn-success txt-color-blueLight">
+																<img src="/template/img/payment/payu.jpg" alt="american express" height="60" width="100">
+															</a>
+															<?php } if($paypal[0]->estatus=='ACT') {?>
+															<a onclick="payPal()" style="margin-left: 1rem;" class="btn btn-success txt-color-blueLight">
+																<img src="/template/img/payment/paypal.png" alt="paypal" height="60" width="80">
+															</a>
+															<?php } if($tucompra[0]->estatus=='ACT') {?>
+															<a onclick="tucompra()" style="margin-left: 1rem;" class="btn btn-success txt-color-blueLight">
+																<img src="/template/img/payment/tucompra.png" alt="tucompra" style="background: #fff" height="60" width="160">
+															</a>
+															<?php } if($compropago[0]->estatus=='ACT') {?>
+															<a onclick="compropago()" style="margin-left: 1rem;" class="btn btn-success txt-color-blueLight">
+																<img src="/template/img/payment/compropago.png" alt="compropago" style="background: #fff" height="60" width="160">
+															</a>
+															<?php }?>
+														</div>
 													</div>
 													
 													<div class="col-sm-4">
-														<div class="invoice-sum-total pull-right">													
-															<h3><strong>Total a Pagar: <span class="text-success pull-right">&nbsp;&nbsp;$ <?php echo $total;?> </span></strong></h3>
+														<div class="invoice-sum-total pull-right">
+															<h4><strong>Subtotal: <span class="text-default pull-right">$ <?php echo $total;?> </span></strong></h4>
+															<h4><strong>Gastos Envio: <span class="text-danger pull-right">$ <?php echo $envio;?> </span></strong></h4>															
+															<h3><strong>Total a Pagar: <span class="text-success pull-right">&nbsp;&nbsp;$ <?php echo $total+$envio;?> </span></strong></h3>
 														</div>
 													</div>
 				
@@ -251,10 +247,7 @@
 												
 												<div class="row">
 													<div class="col-sm-12">
-														<div class="payment-methods pull-right">
-															<a onclick="consignacion()" style="margin-left: 1rem;font-size: 32px" class="btn btn-success"><strong>Confirmar</strong></a>
-															
-														</div>
+														<p class="note">**Para evitar cargos por exceso de penalización , por favor, hacer pagos dentro de los 30 días siguientes a la fecha de vencimiento. Habrá un cargo de interés del 2 % mensual sobre todas las facturas finales.</p>
 													</div>
 												</div>
 				
@@ -320,17 +313,17 @@
 					cantidad : cant*/
 				},
 					type:"post",
-					url:"/ov/compras/compraBitcoin",
-		}).done(function(msg){
+					url:"/ov/compras/SelecioneBanco",
+					success: function(msg){
 							
 							bootbox.dialog({
 								message: msg,
-								title: "Confirmando...",
+								title: "Seleccione Banco",
 								className: "",
 								buttons: {
 									success: {
 									label: "Aceptar",
-									className: "btn-success",
+									className: "hide",
 									callback: function() {
 										 window.location="/ov/dashboard";
 										}
@@ -338,7 +331,7 @@
 								}
 							})
 						}
-					);
+					});
 					
 	}
 

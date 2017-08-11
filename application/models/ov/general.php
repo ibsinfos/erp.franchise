@@ -326,7 +326,7 @@ class general extends CI_Model
 	}
 	function emailPagos()
 	{
-		$q=$this->db->query(' SELECT email FROM emails_departamentos LIMIT 0 , 1');
+		$q=$this->db->query('SELECT email FROM emails_departamentos LIMIT 0 , 1');
 		return $q->result();
 	}
 	

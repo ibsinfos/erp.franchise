@@ -523,12 +523,15 @@
 										success: {
 										label: "Ok!",
 										className: "btn-success",
-										callback: function() {
+											callback: function() {
+												window.location.href='/ov/compras/comprar';
 												bootbox.hideAll();
 											}
 										}
 									}
 								});
+								bootbox.hideAll();
+								window.location.href='/ov/compras/comprar';												
 								update_cart_button();
 							}			
 						}
