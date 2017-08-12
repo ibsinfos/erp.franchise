@@ -5,8 +5,7 @@ USE `erpfranchise`;
 -- Host: erpfranchise.db.11569157.hostedresource.com    Database: erpfranchise
 -- ------------------------------------------------------
 -- Server version	5.5.51-38.1-log
-
-
+ 
 --
 -- Table structure for table `afiliar`
 --
@@ -314,7 +313,7 @@ CREATE TABLE `canal` (
 
 LOCK TABLES `canal` WRITE;
 /*!40000 ALTER TABLE `canal` DISABLE KEYS */;
-INSERT INTO `canal` VALUES (1,'carrito','Carrito de Compras','ACT',30),(2,'cedi','CEDI','ACT',0),(3,'vip','Web Personal','DES',0);
+INSERT INTO `canal` VALUES (1,'carrito','Carrito de Compras','ACT',0),(2,'cedi','CEDI','DES',0),(3,'vip','Web Personal','DES',0);
 /*!40000 ALTER TABLE `canal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -359,7 +358,7 @@ CREATE TABLE `cat_banco` (
   `dir_postal` varchar(100) DEFAULT NULL,
   `estatus` varchar(3) NOT NULL,
   PRIMARY KEY (`id_banco`,`id_pais`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -368,7 +367,6 @@ CREATE TABLE `cat_banco` (
 
 LOCK TABLES `cat_banco` WRITE;
 /*!40000 ALTER TABLE `cat_banco` DISABLE KEYS */;
-INSERT INTO `cat_banco` VALUES (1,'BOL','000000000','MI BANCO','','','Empresa','','ACT');
 /*!40000 ALTER TABLE `cat_banco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -849,7 +847,7 @@ CREATE TABLE `cat_img` (
   `extencion` varchar(6) NOT NULL,
   `estatus` varchar(3) NOT NULL,
   PRIMARY KEY (`id_img`)
-) ENGINE=InnoDB AUTO_INCREMENT=655 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=657 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -858,7 +856,7 @@ CREATE TABLE `cat_img` (
 
 LOCK TABLES `cat_img` WRITE;
 /*!40000 ALTER TABLE `cat_img` DISABLE KEYS */;
-INSERT INTO `cat_img` VALUES (3,'/media/2/user.jpg','user.jpg','user','jpg','ACT'),(647,'/template/img/empresario.jpg','empresario.jpg','empresario','jpg','ACT'),(648,'/media/carrito/bronce.jpg','bronce.jpg','bronce','jpg','ACT'),(649,'/media/carrito/bronce1.jpg','bronce1.jpg','bronce1','jpg','ACT'),(650,'/media/carrito/bronce2.jpg','bronce2.jpg','bronce2','jpg','ACT'),(651,'/media/carrito/platino.jpg','platino.jpg','platino','jpg','ACT'),(652,'/media/carrito/plata.jpg','plata.jpg','plata','jpg','ACT'),(653,'/media/carrito/oro.jpg','oro.jpg','oro','jpg','ACT'),(654,'/media/carrito/premium.jpg','premium.jpg','premium','jpg','ACT');
+INSERT INTO `cat_img` VALUES (3,'/media/2/user.jpg','user.jpg','user','jpg','ACT'),(647,'/template/img/empresario.jpg','empresario.jpg','empresario','jpg','ACT'),(648,'/media/carrito/bronce.jpg','bronce.jpg','bronce','jpg','ACT'),(649,'/media/carrito/bronce1.jpg','bronce1.jpg','bronce1','jpg','ACT'),(651,'/media/carrito/platino.jpg','platino.jpg','platino','jpg','ACT'),(652,'/media/carrito/plata.jpg','plata.jpg','plata','jpg','ACT'),(653,'/media/carrito/oro.jpg','oro.jpg','oro','jpg','ACT'),(654,'/media/carrito/premium.jpg','premium.jpg','premium','jpg','ACT'),(656,'/media/carrito/images1.png','images1.png','images1','png','ACT');
 /*!40000 ALTER TABLE `cat_img` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2724,7 +2722,7 @@ CREATE TABLE `cross_merc_img` (
 
 LOCK TABLES `cross_merc_img` WRITE;
 /*!40000 ALTER TABLE `cross_merc_img` DISABLE KEYS */;
-INSERT INTO `cross_merc_img` VALUES (1,1,650),(3,1,650),(4,2,649),(5,3,651),(6,4,652),(7,5,653),(8,6,654);
+INSERT INTO `cross_merc_img` VALUES (1,1,656),(3,1,656),(4,2,649),(5,3,651),(6,4,652),(7,5,653),(8,6,654);
 /*!40000 ALTER TABLE `cross_merc_img` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3157,7 +3155,7 @@ CREATE TABLE `cuenta_pagar_banco_historial` (
   `valor` varchar(45) DEFAULT NULL,
   `estatus` varchar(3) NOT NULL DEFAULT 'DES',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3166,7 +3164,6 @@ CREATE TABLE `cuenta_pagar_banco_historial` (
 
 LOCK TABLES `cuenta_pagar_banco_historial` WRITE;
 /*!40000 ALTER TABLE `cuenta_pagar_banco_historial` DISABLE KEYS */;
-INSERT INTO `cuenta_pagar_banco_historial` VALUES (1,'2016-09-29 11:03:04','1','2',1,'116','ACT');
 /*!40000 ALTER TABLE `cuenta_pagar_banco_historial` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3700,7 +3697,7 @@ CREATE TABLE `login_attempts` (
   `login` varchar(50) COLLATE utf8_bin NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3760,7 +3757,7 @@ CREATE TABLE `membresia` (
 
 LOCK TABLES `membresia` WRITE;
 /*!40000 ALTER TABLE `membresia` DISABLE KEYS */;
-INSERT INTO `membresia` VALUES (1,'Bronce','365','Binario 5%\nPagos 2%',1),(3,'Platino','365','Platino 7,5%\nPagos 2%',1),(4,'Plata','365','Binario 10%\nPagos 2%',1),(5,'Oro','365','Binario 15%\nPagos 2%',1),(6,'Premium','365','Binario 20%\nPagos 2%',1);
+INSERT INTO `membresia` VALUES (1,'Bronce','365','1GchXf5Hb3A3PNGnguhLAVN58LbigjyN8i',1),(3,'Platino','365','Platino 7,5%\nPagos 2%',1),(4,'Plata','365','Binario 10%\nPagos 2%',1),(5,'Oro','365','Binario 15%\nPagos 2%',1),(6,'Premium','365','Binario 20%\nPagos 2%',1);
 /*!40000 ALTER TABLE `membresia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3826,7 +3823,7 @@ CREATE TABLE `mercancia` (
 
 LOCK TABLES `mercancia` WRITE;
 /*!40000 ALTER TABLE `mercancia` DISABLE KEYS */;
-INSERT INTO `mercancia` VALUES (1,1,'Bro15',5,'BOL','2017-08-09 15:52:33','ACT',0,0.00,0.10,0.00,'0',0.10,'MAS',0.00),(3,3,'Pla35',5,'BOL','2017-08-09 16:01:21','ACT',0,0.00,0.50,0.00,'0',0.50,'MAS',0.00),(4,4,'Pla45',5,'BOL','2017-08-09 16:09:29','ACT',0,0.00,1.00,0.00,'0',1.00,'MAS',0.00),(5,5,'Oro55',5,'BOL','2017-08-09 16:22:44','ACT',0,0.00,2.00,0.00,'0',2.00,'MAS',0.00),(6,6,'Pre65',5,'BOL','2017-08-09 16:24:50','ACT',0,0.00,4.00,0.00,'0',4.00,'MAS',0.00);
+INSERT INTO `mercancia` VALUES (1,1,'Bro15',5,'BOL','2017-08-10 20:24:40','ACT',0,0.00,0.10,0.00,'0',1.00,'MAS',0.00),(3,3,'Pla35',5,'BOL','2017-08-09 16:01:21','ACT',0,0.00,0.50,0.00,'0',0.50,'MAS',0.00),(4,4,'Pla45',5,'BOL','2017-08-09 16:09:29','ACT',0,0.00,1.00,0.00,'0',1.00,'MAS',0.00),(5,5,'Oro55',5,'BOL','2017-08-09 16:22:44','ACT',0,0.00,2.00,0.00,'0',2.00,'MAS',0.00),(6,6,'Pre65',5,'BOL','2017-08-09 16:24:50','ACT',0,0.00,4.00,0.00,'0',4.00,'MAS',0.00);
 /*!40000 ALTER TABLE `mercancia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4873,7 +4870,7 @@ CREATE TABLE `user_profiles` (
 
 LOCK TABLES `user_profiles` WRITE;
 /*!40000 ALTER TABLE `user_profiles` DISABLE KEYS */;
-INSERT INTO `user_profiles` VALUES (1,1,0,0,1,0,0,0,1,1,'1',1,'Admin','','0000-00-00','2017-08-09 15:14:52','ACT',3),(2,2,1,1,2,5,3,1,1,1,'316516165165',1,'Administrador','Oficina Virtual','1980-01-01','2017-08-09 16:29:58','ACT',1),(8,8,1,1,2,1,1,1,1,1,'76333181',0,'CODIGO','MASTER','1984-07-02','2017-08-08 02:23:53','DES',NULL);
+INSERT INTO `user_profiles` VALUES (1,1,0,0,1,0,0,0,1,1,'1',1,'Admin','','0000-00-00','2017-08-11 03:59:05','ACT',3),(2,2,1,1,2,5,3,1,1,1,'316516165165',1,'Administrador','Oficina Virtual','1980-01-01','2017-08-10 20:21:56','ACT',1),(8,8,1,1,2,1,1,1,1,1,'76333181',0,'CODIGO','MASTER','1984-07-02','2017-08-08 02:23:53','DES',NULL);
 /*!40000 ALTER TABLE `user_profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4986,7 +4983,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'1','$2a$08$nxbGEx.0ODRvsAOcDpqOQOv0t2VIZ2ygWibEgnA9wyxYQjwLhWnii','admin@admin.com',1,0,NULL,NULL,NULL,NULL,NULL,'191.109.238.154','2017-08-09 09:31:31','2015-07-11 00:00:00','2017-08-09 16:31:31','FBMXNS2017'),(2,'admin','$2a$08$/jQhYIt4JtV9lMRf3UMNxuqjv1cPt1ExzjrCsJa5EgChlw2k6Qpd6','admin@franchiseone.net',1,0,NULL,NULL,NULL,NULL,NULL,'191.109.238.154','2017-08-09 09:29:58','2015-05-11 00:00:00','2017-08-09 16:29:58','2436SISTEM'),(8,'MASTER','$2a$08$aAxVMMF7qptmX35TaTGJnu1171.sKNKSUp5vcqu0xn8yCSJwqeUOa','marketpaucara1985@gmail.com',1,0,NULL,NULL,NULL,NULL,NULL,'181.114.123.97',NULL,'2017-08-07 19:23:52','2017-08-08 02:23:52','2536SISTEM');
+INSERT INTO `users` VALUES (1,'1','$2a$08$nxbGEx.0ODRvsAOcDpqOQOv0t2VIZ2ygWibEgnA9wyxYQjwLhWnii','admin@admin.com',1,0,NULL,NULL,NULL,NULL,NULL,'181.114.127.91','2017-08-10 20:59:05','2015-07-11 00:00:00','2017-08-11 03:59:05','FBMXNS2017'),(2,'admin','$2a$08$/jQhYIt4JtV9lMRf3UMNxuqjv1cPt1ExzjrCsJa5EgChlw2k6Qpd6','admin@franchiseone.net',1,0,NULL,NULL,NULL,NULL,NULL,'181.114.127.91','2017-08-10 21:00:10','2015-05-11 00:00:00','2017-08-11 04:00:10','2436SISTEM'),(8,'MASTER','$2a$08$aAxVMMF7qptmX35TaTGJnu1171.sKNKSUp5vcqu0xn8yCSJwqeUOa','marketpaucara1985@gmail.com',1,0,NULL,NULL,NULL,NULL,NULL,'181.114.123.97',NULL,'2017-08-07 19:23:52','2017-08-08 02:23:52','2536SISTEM');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5044,7 +5041,7 @@ CREATE TABLE `users_attempts` (
 
 LOCK TABLES `users_attempts` WRITE;
 /*!40000 ALTER TABLE `users_attempts` DISABLE KEYS */;
-INSERT INTO `users_attempts` VALUES ('127.0.0.1','2016-10-16 00:59:39',1,0),('161.10.15.195','2017-07-28 09:57:12',1,0),('161.18.33.121','2017-08-07 09:14:41',1,0),('181.114.123.78','2017-07-30 18:30:37',1,0),('181.114.125.100','2017-08-01 05:45:08',1,0),('191.109.238.154','2017-08-09 09:31:22',1,0);
+INSERT INTO `users_attempts` VALUES ('127.0.0.1','2016-10-16 00:59:39',1,0),('161.10.15.195','2017-07-28 09:57:12',1,0),('161.18.33.121','2017-08-07 09:14:41',1,0),('181.114.122.116','2017-08-10 12:19:16',1,0),('181.114.123.78','2017-07-30 18:30:37',1,0),('181.114.124.108','2017-08-09 14:42:25',1,0),('181.114.125.100','2017-08-01 05:45:08',1,0),('191.109.238.154','2017-08-09 09:31:22',1,0);
 /*!40000 ALTER TABLE `users_attempts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5136,4 +5133,5 @@ LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
--- Dump completed on 2017-08-09 12:23:01
+
+-- Dump completed on 2017-08-10 23:13:50
