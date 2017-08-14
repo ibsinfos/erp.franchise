@@ -16,6 +16,43 @@ echo "Leyendo datos...";
         $database = $db['default']['database'];
         return setDir()."/bk/".$file." ".$hostname." ".$username." ".$password." ".$database." \"$data\"";
     }
+    
+    function newQuery($db,$data = "")
+    {
+        $command = setCommand($db,"query.sh",$data);
+        $query = shell_exec($command);
+        
+        $datos = explode("\n", $query);
+        
+        if(!$datos)
+            return false;
+            
+        $atributos = explode("	", $datos[0]);
+        $result = setArray($datos, $atributos);
+        return $result;
+    }
+    
+    function setArray( $datos, $atributos) {
+        
+        unset($datos[sizeof($datos)-1]);
+        unset($datos[0]);
+        
+        for ($i = 1 ; $i <= sizeof($datos) ; $i++){
+            $valores = explode("	", $datos[$i]);
+            $datos[$i] =  array();
+            $k = 0;
+            foreach ($valores as $valor) {
+                
+                if($valor=="NULL")
+                    $valor = "";
+                    
+                    $datos[$i][$atributos[$k]] = $valor;
+                    $k++;
+            }
+        }
+        
+        return $datos;
+    }
 
 echo "\n>OK\nCargando base de datos...";
 
@@ -39,3 +76,19 @@ echo "\n>OK\nCreando dump...";
 $command = setCommand($db,"bk_daily.sh");
 exec($command);
 echo "\n>OK\n\n!Dump creado con exito!\n";
+
+echo "\n\n>PROCESOS 1> AUTOBONO DIARIO\n";
+    include(setDir()."/bk/autobono.php");
+echo "\n\nCargando Datos\n"; 
+    $autobono = new autobono($db);
+echo "\n>OK\nProcesando Datos\n";   
+    $afiliados = $autobono->calcular();
+echo "\n>OK\nRealizando Acciones\n";
+    foreach ($afiliados as $afiliado => $bonos){
+        echo "\n -> ".$afiliado." \n\n";
+        foreach ($bonos as $bono => $value){
+            echo "o-> ".$bono." : $value  \n";
+        }
+    }
+    
+    
