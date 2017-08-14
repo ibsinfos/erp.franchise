@@ -29,19 +29,191 @@ class bonosfranchise extends CI_Model
         if (! $value)
             $value = date('Y-m-d');
         
-        $this->fechaFin = $value;
+        $this->fechaFin = $value." 23:59:59";
     }
 
     function isActived($id_usuario, $id_bono = 0, $red = 1, $fecha = '')
     {
-        $this->isActivedAfiliado($id_usuario, $red);
+        $this->setFechaInicio($fecha);
+        $this->setFechaFin($fecha);
+        
+        $isActived = $this->isActivedAfiliado($id_usuario, $red);
+        $isPaid = $this->isPaid($id_usuario,$id_bono);
+        
+        if($isPaid||!$isActived){
+            return false;
+        }
+        
+        return true;
+        
     }
 
     function isActivedAfiliado($id_usuario, $red = 1)
+    {    
+        
+        if($id_usuario==2)
+            return true;
+        
+        $inversion = $this->isActivedbyInversion($id_usuario);
+        
+        $patas = $this->isActivedbyPatas($id_usuario);
+        
+        $Pasa = ($inversion&&$patas) ? true : false;
+        
+        return $Pasa;
+         
+    }
+    
+    private function isActivedbyPatas($id_usuario){
+        
+        $patas = $this->getPatas($id_usuario);
+
+        if(!$patas)
+            return false;
+        
+        foreach ($patas as $afiliado){
+            $membresia = $this->getLastMembresia($afiliado->id_afiliado);
+            if(!$membresia)
+                return false;
+        }
+        
+        return true;
+        
+    }
+   
+    private function getPatas($id_usuario)
     {
-                
+        $query = "SELECT 
+                    	   id_afiliado
+                        FROM
+                    		afiliar
+                    	WHERE
+                    		debajo_de = $id_usuario
+                            AND directo = $id_usuario";
+        
+        $q = $this->db->query($query);
+        $q = $q->result();
+        
+        if (!$q||(sizeof($q)<2))
+            return false;
+            
+        $valid = $q;
+            
+        return $valid;
     }
 
+    
+    private function isActivedbyInversion($id_usuario)
+    {        
+        
+         $membresia = $this->getLastMembresia($id_usuario);    
+         
+         if(!$membresia)
+             return false;
+         
+         $acumulado = $this->getGananciaBono($id_usuario,0,$membresia->fecha,$this->fechaFin);
+         
+         if(!$acumulado)
+             return false;    
+         
+         $Pasa = $acumulado<($membresia->costo*2) ? true : false;
+         
+         return $Pasa;
+    }
+
+    
+    private function getLastMembresia($id_usuario){
+        
+        $fecha = $this->getLastCompra($id_usuario,5);
+        
+        if(!$fecha->fecha)
+            return false;
+        
+        $membresia = $this->getLastCompra($id_usuario,5,0,$fecha->fecha);
+        
+        return $membresia;        
+            
+    }
+    
+    private function getLastCompra($id_usuario,$tipo = 0,$mercancia = 0,$fecha = false){
+        
+        $where = "";$select="max(v.fecha) fecha";
+        
+        if ($tipo > 0) {
+            $where .= " AND i.id_tipo_mercancia in ($tipo)";
+        }
+        
+        if ($mercancia > 0) {
+            $where .= " AND i.id in ($mercancia)";
+        }
+        
+        if($fecha){
+            $select = "v.id_venta,group_concat(c.id_mercancia) mercancia,m.costo,v.fecha";
+            $where.= " AND v.fecha = '$fecha'";            
+        }
+        
+        $query = "SELECT 
+                        	$select
+                        FROM
+                        	venta v,
+                            cross_venta_mercancia c,
+                            items i,
+                            mercancia m
+                        WHERE 
+                        	c.id_venta = v.id_venta
+                            AND m.id = i.id   
+                            AND i.id = c.id_mercancia                                                    
+                        	AND v.id_user = $id_usuario
+                            AND v.id_estatus = 'ACT' 
+                            AND v.id_metodo_pago = 'BANCO'
+                            $where";
+        
+        $q = $this->db->query($query);
+        $q = $q->result();
+        
+        if (!$q)
+            return false;
+        
+        $valid = $q[0];
+        
+        return $valid;
+        
+    }
+
+    private function getGananciaBono($id_usuario,$id_bono = 0,$fechaInicio = '',$fechaFin = ''){
+     
+        if(!$fechaInicio||!$fechaFin){
+            $fechaInicio = $this->getPeriodoFecha("DIA", "INI", '');
+            $fechaFin = $this->getPeriodoFecha("DIA", "FIN", '');
+        }
+        
+        $where = "";
+        if($id_bono>0){
+            $where.=" AND c.id_bono in ($id_bono)";
+        }
+        
+        $query = "SELECT 
+                    	sum(c.valor) monto
+                    FROM
+                    	comision_bono c,
+                        comision_bono_historial h
+                    WHERE
+                    	c.id_usuario = $id_usuario
+                    	AND c.id_bono_historial = h.id
+                    	AND h.fecha between '$fechaInicio' and '$fechaFin' $where";
+            
+        $q = $this->db->query($query);
+        $q = $q->result();
+        
+        if (!$q)
+            return false;
+        
+        $valid = $q[0]->monto;
+        
+        return $valid;
+        
+    }
+    
     private function isPaid($id_usuario,$id_bono){
         
         $query = "SELECT
@@ -158,7 +330,7 @@ class bonosfranchise extends CI_Model
                 
                 break;
             
-            case 1:
+            case 2:
                 
                 return $this->getValorBonoBitcoin($parametro);
                 
@@ -171,10 +343,99 @@ class bonosfranchise extends CI_Model
     }
 
     private function getValorBonoBinario($parametro)
-    {}
+    {
+        
+        $valores = $this->getBonoValorNiveles(1);
+        
+        $bono = $this->getBono(1);
+        $periodo = isset($bono[0]->frecuencia) ? $bono[0]->frecuencia : "UNI";
+        
+        $fechaInicio=$this->getPeriodoFecha($periodo, "INI", $parametro["fecha"]);
+        $fechaFin=$this->getPeriodoFecha($periodo, "FIN", $parametro["fecha"]); 
+        
+        $id_usuario = $parametro["id_usuario"];
+        
+        $valor = $this->getValorPataDebil($id_usuario,$fechaInicio,$fechaFin);
+        
+        $monto = $this->getMontoBinario($id_usuario,$valores,$valor);
+        
+        return $monto;
+        
+    }
+    
+    private function getMontoBinario($id_usuario,$valores,$valor)
+    {
+        $membresia = $this->getLastMembresia($id_usuario);        
+        
+        if (!$membresia)
+            return 0;
+        
+        $mercancia = $membresia->mercancia;
+        
+        if($mercancia>1)
+            $mercancia-=1;
+        
+        $per = $valores[$mercancia]->valor / 100;
+        $monto = $valor * $per;
+        
+        return $monto;
+    }
+
+   
+    private function getValorPataDebil($id_usuario,$fechaInicio,$fechaFin)
+    {
+        $patas = $this->getPatas($id_usuario);
+        
+        if (!$patas)
+            return 0;
+        
+        $usuario= new $this->afiliado();
+         
+        $valor = 0; 
+        foreach ($patas as $afiliado) {
+            
+            $valpata=$usuario->getComprasPersonalesIntervaloDeTiempo($afiliado->id_afiliado,1,$fechaInicio,$fechaFin,5,"0","COSTO");
+            $valpata+=$usuario->getVentasTodaLaRed($afiliado->id_afiliado,1,"RED","EQU",0,$fechaInicio,$fechaFin,5,"0","COSTO");
+            
+            if($valor>$valpata||$valor = 0)
+                $valor = $valpata; 
+                
+        }
+        return $valor;
+    }
+
 
     private function getValorBonoBitcoin($parametro)
-    {}
+    {
+        
+        $valores = $this->getBonoValorNiveles(2);
+        
+        $bono = $this->getBono(2);
+        $periodo = isset($bono[0]->frecuencia) ? $bono[0]->frecuencia : "UNI";
+        
+        $this->setFechaInicio($parametro["fecha"]);
+        $this->setFechaFin($parametro["fecha"]); 
+        
+        $id_usuario = $parametro["id_usuario"];
+        
+        $monto = $this->getMontoBitcoin($id_usuario,$valores[1]);
+        
+        return $monto;
+        
+    }
+   
+    private function getMontoBitcoin($id_usuario,$valores)
+    {
+        $membresia = $this->getLastMembresia($id_usuario);
+        
+        if (!$membresia)
+            return 0;
+        
+        $per = $valores->valor / 100;
+        $monto = $membresia->costo * $per;
+        return $monto;
+    }
+
 
     private function getBonoValorNiveles($id)
     {
@@ -283,7 +544,7 @@ class bonosfranchise extends CI_Model
 
     private function getPeriodoFecha($frecuencia, $tipo, $fecha = '')
     {
-        if (! $fecha)
+        if (!$fecha)
             $fecha = date('Y-m-d');
         
         $periodoFecha = array(
@@ -300,6 +561,10 @@ class bonosfranchise extends CI_Model
         
         if ($frecuencia == "UNI") {
             return ($tipo == "INI") ? $this->getInicioFecha() : date('Y-m-d');
+        }
+        
+        if ($frecuencia == "DIA") {
+            return ($tipo == "INI") ? date('Y-m-d') : date('Y-m-d')." 23:59:59";;
         }
         
         if (! isset($periodoFecha[$frecuencia]) || ! isset($tipoFecha[$tipo])) {

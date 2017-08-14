@@ -6,7 +6,7 @@ USE `erpfranchise`;
 -- ------------------------------------------------------
 -- Server version	5.7.14
 
-
+ 
 --
 -- Table structure for table `afiliar`
 --
@@ -288,7 +288,7 @@ CREATE TABLE `bono` (
 
 LOCK TABLES `bono` WRITE;
 /*!40000 ALTER TABLE `bono` DISABLE KEYS */;
-INSERT INTO `bono` VALUES (1,'Binario','Pata Debil segun paquete','2017-08-01','2027-09-30',0,0,'DIA','NO','ACT'),(2,'Diario','2% Diario','2017-07-01','2027-09-30',0,0,'DIA','NO','ACT');
+INSERT INTO `bono` VALUES (1,'Binario','Pata Debil segun paquete','2017-07-01','2027-09-30',0,0,'DIA','NO','ACT'),(2,'Diario','2% Diario','2017-07-01','2027-09-30',0,0,'DIA','NO','ACT');
 /*!40000 ALTER TABLE `bono` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -391,7 +391,7 @@ CREATE TABLE `cat_bono_condicion` (
   `condicion2` int(11) NOT NULL DEFAULT '0',
   `calificado` varchar(3) NOT NULL DEFAULT 'DOS',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -400,7 +400,7 @@ CREATE TABLE `cat_bono_condicion` (
 
 LOCK TABLES `cat_bono_condicion` WRITE;
 /*!40000 ALTER TABLE `cat_bono_condicion` DISABLE KEYS */;
-INSERT INTO `cat_bono_condicion` VALUES (3,1,1,1,2,1,0,0,'REC'),(2,2,1,1,2,1,0,0,'REC');
+INSERT INTO `cat_bono_condicion` VALUES (4,1,1,1,2,1,0,0,'REC'),(2,2,1,1,2,1,0,0,'REC');
 /*!40000 ALTER TABLE `cat_bono_condicion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -419,7 +419,7 @@ CREATE TABLE `cat_bono_valor_nivel` (
   `condicion_red` varchar(8) NOT NULL DEFAULT 'DIRECTOS',
   `verticalidad` varchar(4) DEFAULT 'ASC',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -428,7 +428,7 @@ CREATE TABLE `cat_bono_valor_nivel` (
 
 LOCK TABLES `cat_bono_valor_nivel` WRITE;
 /*!40000 ALTER TABLE `cat_bono_valor_nivel` DISABLE KEYS */;
-INSERT INTO `cat_bono_valor_nivel` VALUES (6,1,1,5,'RED','PASC'),(5,1,0,1,'RED','PASC'),(3,2,0,2,'RED','PASC'),(4,2,1,100,'RED','ASC');
+INSERT INTO `cat_bono_valor_nivel` VALUES (7,1,0,0,'RED','PASC'),(3,2,0,0,'RED','PASC'),(4,2,1,2,'RED','ASC'),(8,1,1,5,'RED','PASC'),(9,1,2,7.5,'RED','PASC'),(10,1,3,10,'RED','ASC'),(11,1,4,15,'RED','ASC'),(12,1,5,20,'RED','ASC');
 /*!40000 ALTER TABLE `cat_bono_valor_nivel` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2320,7 +2320,7 @@ CREATE TABLE `comision_bono` (
   `id_bono_historial` int(11) NOT NULL,
   `valor` float NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2329,6 +2329,7 @@ CREATE TABLE `comision_bono` (
 
 LOCK TABLES `comision_bono` WRITE;
 /*!40000 ALTER TABLE `comision_bono` DISABLE KEYS */;
+INSERT INTO `comision_bono` VALUES (1,2,2,1,0.04);
 /*!40000 ALTER TABLE `comision_bono` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2347,7 +2348,7 @@ CREATE TABLE `comision_bono_historial` (
   `ano` int(11) NOT NULL,
   `fecha` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2356,6 +2357,7 @@ CREATE TABLE `comision_bono_historial` (
 
 LOCK TABLES `comision_bono_historial` WRITE;
 /*!40000 ALTER TABLE `comision_bono_historial` DISABLE KEYS */;
+INSERT INTO `comision_bono_historial` VALUES (1,2,1,1,1970,'2017-08-12');
 /*!40000 ALTER TABLE `comision_bono_historial` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3300,7 +3302,7 @@ CREATE TABLE `cross_venta_mercancia` (
   `nombreImpuesto` varchar(100) NOT NULL DEFAULT '',
   `id_` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id_`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3309,6 +3311,7 @@ CREATE TABLE `cross_venta_mercancia` (
 
 LOCK TABLES `cross_venta_mercancia` WRITE;
 /*!40000 ALTER TABLE `cross_venta_mercancia` DISABLE KEYS */;
+INSERT INTO `cross_venta_mercancia` VALUES (1,5,1,546,104,650,'16% de IVA\n',1),(2,1,1,420,67.2,487.2,'16% de IVA\n',2),(2,4,1,390,62.4,452.4,'16% de IVA\n',3),(3,3,2,420,67.2,974.4,'16% de IVA\n',4);
 /*!40000 ALTER TABLE `cross_venta_mercancia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5239,7 +5242,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'1','$2a$08$nxbGEx.0ODRvsAOcDpqOQOv0t2VIZ2ygWibEgnA9wyxYQjwLhWnii','admin@admin.com',1,0,NULL,NULL,NULL,NULL,NULL,'::1','2017-08-12 02:00:11','2015-07-11 00:00:00','2017-08-12 02:00:11','FBMXNS2017'),(2,'admin','$2a$08$/jQhYIt4JtV9lMRf3UMNxuqjv1cPt1ExzjrCsJa5EgChlw2k6Qpd6','admin@franchiseone.net',1,0,NULL,NULL,NULL,NULL,NULL,'191.109.238.154','2017-08-09 09:29:58','2015-05-11 00:00:00','2017-08-10 02:29:58','2436SISTEM'),(8,'MASTER','$2a$08$aAxVMMF7qptmX35TaTGJnu1171.sKNKSUp5vcqu0xn8yCSJwqeUOa','marketpaucara1985@gmail.com',1,0,NULL,NULL,NULL,NULL,NULL,'181.114.123.97',NULL,'2017-08-07 19:23:52','2017-08-08 12:23:52','2536SISTEM');
+INSERT INTO `users` VALUES (1,'1','$2a$08$nxbGEx.0ODRvsAOcDpqOQOv0t2VIZ2ygWibEgnA9wyxYQjwLhWnii','admin@admin.com',1,0,NULL,NULL,NULL,NULL,NULL,'::1','2017-08-14 04:51:24','2015-07-11 00:00:00','2017-08-14 04:51:24','FBMXNS2017'),(2,'admin','$2a$08$/jQhYIt4JtV9lMRf3UMNxuqjv1cPt1ExzjrCsJa5EgChlw2k6Qpd6','admin@franchiseone.net',1,0,NULL,NULL,NULL,NULL,NULL,'191.109.238.154','2017-08-09 09:29:58','2015-05-11 00:00:00','2017-08-10 02:29:58','2436SISTEM'),(8,'MASTER','$2a$08$aAxVMMF7qptmX35TaTGJnu1171.sKNKSUp5vcqu0xn8yCSJwqeUOa','marketpaucara1985@gmail.com',1,0,NULL,NULL,NULL,NULL,NULL,'181.114.123.97',NULL,'2017-08-07 19:23:52','2017-08-08 12:23:52','2536SISTEM');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5377,7 +5380,7 @@ CREATE TABLE `venta` (
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `id_metodo_pago` varchar(10) NOT NULL,
   PRIMARY KEY (`id_venta`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5386,6 +5389,7 @@ CREATE TABLE `venta` (
 
 LOCK TABLES `venta` WRITE;
 /*!40000 ALTER TABLE `venta` DISABLE KEYS */;
+INSERT INTO `venta` VALUES (1,2,'ACT','2017-08-12 14:00:00','BANCO'),(2,2,'ACT','2017-08-12 12:00:00','BANCO'),(3,2,'ACT','2017-08-12 11:00:00','BANCO'),(4,2,'ACT','2017-08-05 16:51:39','CEDI');
 /*!40000 ALTER TABLE `venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5395,7 +5399,7 @@ UNLOCK TABLES;
 /*!50003 DROP PROCEDURE IF EXISTS `afiliar` */;
  
 DELIMITER ;;
-CREATE PROCEDURE `afiliar`(	
+CREATE   PROCEDURE `afiliar`(	
 
 								ID_afiliar int
 
@@ -5643,6 +5647,6 @@ DELIMITER ;
 /*!50001 DROP VIEW IF EXISTS `items`*/;
  
 /*!50001 CREATE VIEW `items` AS select `m`.`id` AS `id`,`m`.`sku` AS `sku`,`m`.`puntos_comisionables` AS `puntos_comisionables`,(case when (`m`.`id_tipo_mercancia` = 1) then (select `producto`.`nombre` from `producto` where (`producto`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 2) then (select `servicio`.`nombre` from `servicio` where (`servicio`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 3) then (select `combinado`.`nombre` from `combinado` where (`combinado`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 4) then (select `paquete_inscripcion`.`nombre` from `paquete_inscripcion` where (`paquete_inscripcion`.`id_paquete` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 5) then (select `membresia`.`nombre` from `membresia` where (`membresia`.`id` = `m`.`sku`)) else 'No define' end) AS `item`,(case when (`m`.`id_tipo_mercancia` = 1) then (select `producto`.`id_grupo` from `producto` where (`producto`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 2) then (select `servicio`.`id_red` from `servicio` where (`servicio`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 3) then (select `combinado`.`id_red` from `combinado` where (`combinado`.`id` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 4) then (select `paquete_inscripcion`.`id_red` from `paquete_inscripcion` where (`paquete_inscripcion`.`id_paquete` = `m`.`sku`)) when (`m`.`id_tipo_mercancia` = 5) then (select `membresia`.`id_red` from `membresia` where (`membresia`.`id` = `m`.`sku`)) else '' end) AS `categoria`,(case when (`m`.`id_tipo_mercancia` = 1) then (select `a`.`id_red` from (`producto` `p` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `p`.`id_grupo`) and (`p`.`id` = `m`.`sku`))) when (`m`.`id_tipo_mercancia` = 2) then (select `a`.`id_red` from (`servicio` `s` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `s`.`id_red`) and (`s`.`id` = `m`.`sku`))) when (`m`.`id_tipo_mercancia` = 3) then (select `a`.`id_red` from (`combinado` `o` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `o`.`id_red`) and (`o`.`id` = `m`.`sku`))) when (`m`.`id_tipo_mercancia` = 4) then (select `a`.`id_red` from (`paquete_inscripcion` `q` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `q`.`id_red`) and (`q`.`id_paquete` = `m`.`sku`))) when (`m`.`id_tipo_mercancia` = 5) then (select `a`.`id_red` from (`membresia` `b` join `cat_grupo_producto` `a`) where ((`a`.`id_grupo` = `b`.`id_red`) and (`b`.`id` = `m`.`sku`))) else '' end) AS `red`,`m`.`id_tipo_mercancia` AS `id_tipo_mercancia` from `mercancia` `m` */;
+ 
 
-
--- Dump completed on 2017-08-12  1:10:08
+-- Dump completed on 2017-08-14  1:23:47
