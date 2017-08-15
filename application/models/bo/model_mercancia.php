@@ -56,10 +56,12 @@ class model_mercancia extends CI_Model {
 		return $mercancia;
 	}
 	function nueva_membresia(){
-			$dato_membresia = array (
+	    $bitcoin = isset($_POST ['bitcoin']) ? $_POST ['bitcoin'] : 0;
+            $dato_membresia = array (
 				"nombre" => $_POST ['nombre'],
 				"caducidad" => $_POST['caducidad'],
 				"descripcion" => $_POST ['descripcion'],
+			    "bitcoin" => $bitcoin,
 				"id_red" => $_POST ['red'] 
 		);
 		$this->db->insert ( "membresia", $dato_membresia );

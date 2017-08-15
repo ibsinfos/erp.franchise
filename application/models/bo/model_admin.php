@@ -1198,12 +1198,14 @@ where(a.id_pais=b.Code)");
 			$sku_q=$this->db->query("SELECT sku from mercancia where id=".$_POST['id_merc']);
 			$sku_res=$sku_q->result();
 			$sku=$sku_res[0]->sku;
-			$dato_membresia=array(
-					"nombre"       => $_POST['nombre'],
-					"caducidad"     => $_POST['caducidad'],
-					"descripcion"  => $_POST['descripcion'],
-					"id_red"    => $_POST['red']
-	            );
+			$bitcoin = isset($_POST ['bitcoin']) ? $_POST ['bitcoin'] : 0;
+			$dato_membresia = array (
+			    "nombre" => $_POST ['nombre'],
+			    "caducidad" => $_POST['caducidad'],
+			    "descripcion" => $_POST ['descripcion'],
+			    "bitcoin" => $bitcoin,
+			    "id_red" => $_POST ['red']
+			);
 			$this->db->where('id', $sku);
 			$this->db->update('membresia', $dato_membresia); 
 			$iva="";

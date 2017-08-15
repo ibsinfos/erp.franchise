@@ -108,13 +108,13 @@
 													<div class="col-md-12 well well-sm  bg-color-darken txt-color-white no-border">
 														<div class="fa-lg">
 															Precio :
-															<span class="pull-right">$ <?php echo $this->cart->total(); ?> ** </span>
+															<span class="pull-right"> <?php echo $this->cart->total(); ?> <i class="fa fa-bitcoin"></i> </span>
 														</div>
 													</div>
 													<div class="col-md-12 well well-sm  bg-color-green txt-color-white no-border">
 														<div class="fa-lg">
 															Puntos :
-															<span class="pull-right">** <?php echo $puntos; ?> ** </span>
+															<span class="pull-right"><?php echo $puntos; ?> ** </span>
 														</div>
 													</div>
 												</div>
@@ -193,14 +193,14 @@
 												                        <span> '.($compras[$contador]['puntos']*$cantidad).' </span>
 																	</td>
       																<td>
-												                        <span>$ '.($precioUnidad*$cantidad).' </span>
+												                        <span> '.($precioUnidad*$cantidad).'  <i class="fa fa-bitcoin"></i> </span>
 																	</td>
 																	<td>
-																	$ '.($costoImpuesto*$cantidad).'
+																	'.($costoImpuesto*$cantidad).' <i class="fa fa-bitcoin"></i> 
         															<br>'.$nombreImpuestos.'
       																<br>
 																	</td>
-																	<td><strong>$ '.number_format(($precioUnidad*$cantidad)+($costoImpuesto*$cantidad),2).'</strong></td>
+																	<td><strong>'.number_format(($precioUnidad*$cantidad)+($costoImpuesto*$cantidad),2).' <i class="fa fa-bitcoin"></i></strong></td>
 												                    <td  style="width:5%" class="delete"><a onclick="quitar_producto(\''.$items['rowid'].'\')"> <i class="txt-color-red fa fa-trash-o fa-3x "></i> </a></td>
 																</tr>'; 
 														$total+=round(($precioUnidad*$cantidad)+($costoImpuesto*$cantidad),2);
@@ -243,7 +243,7 @@
 													
 													<div class="col-sm-4">
 														<div class="invoice-sum-total pull-right">													
-															<h3><strong>Total a Pagar: <span class="text-success pull-right">&nbsp;&nbsp;$ <?php echo $total;?> </span></strong></h3>
+															<h3><strong>Total a Pagar: <span class="text-success pull-right">&nbsp;&nbsp;<?php echo $total;?>  <i class="fa fa-bitcoin"></i> </span></strong></h3>
 														</div>
 													</div>
 				

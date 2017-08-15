@@ -3021,7 +3021,7 @@ function index()
 	function printDetalleMercancia($id_tipo_mercancia,$id_mercancia){
 		$imagenes=$this->modelo_compras->get_imagenes($id_mercancia);
 		
-		if($id_tipo_mercancia==1)
+		if ($id_tipo_mercancia==1)
 			$detalles=$this->modelo_compras->detalles_productos($id_mercancia);
 		else if($id_tipo_mercancia==2)
 			$detalles=$this->modelo_compras->detalles_servicios($id_mercancia);
@@ -3034,6 +3034,12 @@ function index()
 		
 		$img_item = $imagenes[0]->url;
 			
+		$publico = ($detalles[0]->costo_publico>0) 
+		      ? '<span class="old-price">$ '.$detalles[0]->costo_publico.'</span>' : '';
+		
+		$bitcoin = ($id_tipo_mercancia==5) 
+		      ? ' <div class="grid-description"><h4>'.$detalles[0]->bitcoin.'. </h4></div>' : '';
+		
 			if(!file_exists(getcwd().$img_item))
 				$img_item = "/template/img/favicon/favicon.png";
 		
@@ -3044,15 +3050,19 @@ function index()
 				</a>
             </div>
             <div class="description">
-              <h4><a >'.$detalles[0]->nombre.'</a></h4>
-              <div class="grid-description">
+              <h4><a >'.$detalles[0]->nombre.'</a></h4>'.
+                $bitcoin
+              .'<div class="grid-description">
                 <p>'.$detalles[0]->descripcion.'. </p>
               </div>
               <div class="list-description">
                 <p> Sed sed rutrum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque risus lacus, iaculis in ante vitae, viverra hendrerit ante. Aliquam vel fermentum elit. Morbi rhoncus, neque in vulputate facilisis, leo tortor sollicitudin odio, quis pellentesque lorem nisi quis enim. In dolor mi, hendrerit at blandit vulputate, congue a purus. Sed eget turpis sit amet orci euismod accumsan. Praesent sit amet placerat elit. </p>
               </div>
                </div>
-            <div class="price"> <span>$ '.$detalles[0]->costo.'</span> <span class="old-price">$ '.$detalles[0]->costo_publico.'</span> </div><br>
+            <div class="price"> 
+                    <span>$ '.$detalles[0]->costo.' <i class="fa fa-bitcoin"></i></span>'.
+                        $publico                   
+            .'</div><br>
             <br>
           </div>';
 		
@@ -3458,7 +3468,7 @@ function index()
 					</div>
 					<hr/>
 					<div class="price">'.$puntos_comisionables.'<br>
-					<span>$ '.$mercancia[$i]->costo.'</span>
+					<span>'.$mercancia[$i]->costo.' <i class="fa fa-bitcoin"></i></span>
 					</div>
 					<br>
 					<div class=""> 

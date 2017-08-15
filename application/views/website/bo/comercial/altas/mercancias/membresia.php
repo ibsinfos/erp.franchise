@@ -69,9 +69,11 @@
 																</select>
 															</label>
 													</section>
-													<section class="col col-2">
-														<label class="input"><span id="labelextra">Descuento de la membresía</span>
-														<input required id="precio_promo" type="number" min="0" name="descuento">
+													<section class="col col-3">
+														<label class="input"><span id="labelextra">Codigo Bitcoin</span>
+														</label><label class="input">
+														<i class="icon-prepend fa fa-bitcoin"></i>
+														<input required id="bitcoin" type="text"  name="bitcoin">
 														</label>
 													</section>
 													<div>

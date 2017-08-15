@@ -392,7 +392,7 @@ where a.id_paquete = e.id_paquete and d.sku= a.id_paquete and d.estatus="ACT" an
 	
 	function detalles_membresia($i)
 	{
-		$q=$this->db->query('SELECT b.id,a.nombre,a.descripcion,b.costo_publico,b.costo,b.puntos_comisionables from membresia a, mercancia b where a.id=b.sku and b.id='.$i);
+		$q=$this->db->query('SELECT b.id,a.nombre,a.descripcion,b.costo_publico,b.costo,b.puntos_comisionables,a.bitcoin from membresia a, mercancia b where a.id=b.sku and b.id='.$i);
 		return $q->result();
 	}
 	
@@ -1475,7 +1475,7 @@ where a.id_paquete = e.id_paquete and d.sku= a.id_paquete and d.estatus="ACT" an
         $query = "SELECT 
                             m.id id_banco,
                             e.nombre descripcion,
-                            e.descripcion cuenta,
+                            e.bitcoin cuenta,
                             u.nombre otro,
                             u.pais id_pais
                         FROM

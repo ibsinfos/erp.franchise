@@ -366,7 +366,7 @@ if ($id_sponsor && $name_sponsor) {
                         echo '<span>SWIFT:	<b>' . $cuenta->swift . '</b>,</span><br>';
                     if ($cuenta->dir_postal)
                         echo '<span>Dirección postal  :<b>' . $cuenta->dir_postal . '</b>,</span><br>';
-                    echo '<span>Valor:	<b> $ ' . $cuenta->valor . '</b>,</span>
+                    echo '<span>Valor:	<b>' . $cuenta->valor . ' <i class="fa fa-bitcoin"></i> </b>,</span>
 																		</div>
 																	</li>';
                 }
