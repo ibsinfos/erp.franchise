@@ -112,13 +112,13 @@ function index()
 		
 		$id = $this->tank_auth->get_user_id();
 		
-		
+		/*
 		$validacionCompraMercancia=$this->general->isActived($id);
 		if($validacionCompraMercancia>0){
 			$this->carritoTipoMercancia($validacionCompraMercancia);
 			return true;
 		}
-			
+		*/	
 		
 		$usuario = $this->general->get_username($id);
 		$grupos = $this->model_mercancia->CategoriasMercancia();
@@ -179,6 +179,9 @@ function index()
 
 		$this->template->set("usuario",$usuario);
 		$this->template->set("mostrarMercancia",$mostrarMercanciaTipo);
+		
+		$style=$this->general->get_style(1);
+		$this->template->set("style",$style);
 		
 		$this->template->set_theme('desktop');
 		$this->template->set_layout('website/main');
@@ -3034,12 +3037,10 @@ function index()
 			if(!file_exists(getcwd().$img_item))
 				$img_item = "/template/img/favicon/favicon.png";
 		
-		echo '<div class="product">
-          <a data-placement="left" data-original-title="Add to Wishlist" data-toggle="tooltip" class="add-fav tooltipHere">
-          <i class="glyphicon glyphicon-heart"></i>
-          </a>
-            <div class="image"> <a href="product-details.html">
-				<img class="img-responsive" alt="img" src="'.$img_item.'" style="width: 15rem ! important; height: 10rem ! important;">
+		echo '<div class="">
+
+            <div class="image"> <a href="'.$img_item.'">
+				<img class="img-responsive" alt="img" src="'.$img_item.'" style="width: auto ;height: 10em ! important;padding: 10px;">
 				</a>
             </div>
             <div class="description">

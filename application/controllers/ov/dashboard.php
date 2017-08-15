@@ -18,6 +18,7 @@ class dashboard extends CI_Controller
 		$this->load->model('model_tipo_red');
 		$this->load->model('bo/model_admin');
 		$this->load->model('bo/bonos/titulo');
+		$this->load->model('/bo/bonos/clientes/franchise/bonosfranchise');
 		
 		
 	}
@@ -153,8 +154,9 @@ class dashboard extends CI_Controller
 		
 		$style=$this->modelo_dashboard->get_style($id);
 		
-		$actividad=$this->modelo_compras->is_afiliado_activo($id,date('Y-m-d'));
-
+		$actividad_compras=$this->modelo_compras->is_afiliado_activo($id,date('Y-m-d'));
+		$actividad =  $this->bonosfranchise->isActivedAfiliado($id);		
+		
 		$puntos_semana=$this->modelo_dashboard->get_puntos_personales_semana($id);
 		$puntos_mes=$this->modelo_dashboard->get_puntos_personales_mes($id);
 		$puntos_total=$this->modelo_dashboard->get_puntos_personales_total($id);
@@ -165,7 +167,8 @@ class dashboard extends CI_Controller
 		
 		$ultimos_auspiciados=$this->modelo_dashboard->get_ultimos_auspiciados($id);
 		
-		$titulo=$this->titulo->getNombreTituloAlcanzadoAfiliado($id,date('Y-m-d'));
+		$titulo_rango = $this->titulo->getNombreTituloAlcanzadoAfiliado($id,date('Y-m-d'));
+		$titulo = $this->bonosfranchise->membresiaTitulo($id);
 		
 		$this->template->set("id",$id);
 		$this->template->set("usuario",$usuario);

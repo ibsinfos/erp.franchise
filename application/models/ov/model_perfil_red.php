@@ -681,7 +681,7 @@ order by (U.id);");
 								. "', btn_1_color='" . $_POST ['color_1'] 
 								. "', btn_2_color='" . $_POST ['color_2'] . "' 
 								where id_usuario=" . $id );
-		$this->actualizar_cuenta_banco($id);
+		$this->actualizar_cuenta_bitcoin($id);
 	}
 	function cp()
 	{
@@ -795,6 +795,20 @@ order by (U.id);");
 		$this->db->update('cross_user_banco', $dato);
 	
 		return true;
+	}
+	
+	function actualizar_cuenta_bitcoin($id)
+	{
+	    $cuenta = isset($_POST['c_cuenta']) ? $_POST['c_cuenta'] : "Your account";
+	    
+        $dato=array(
+	        "cuenta"     => $cuenta
+	    );
+	    
+	    $this->db->where('id_user', $id);
+	    $this->db->update('cross_user_banco', $dato);
+	    
+	    return true;
 	}
 	
 	function ConsultarIdPadre($id , $id_red_padre){
