@@ -308,7 +308,8 @@ class calculador_bono extends CI_Model
 		    $usuarioPuedeRecibirBono = $this->usuarioPuedeRecibirBono($id_bono, $idAfiliado, $this->getFechaCalculoBono());
 		    if($usuarioPuedeRecibirBono){
 		        $valor = $this->valorCondicion;
-		        log_message('DEV',"repartirComisionesBonoEnLaRed : $idAfiliado | $valor");$repartidorComisionBono->repartirComisionBono($repartidorComisionBono->getIdTransaccionPagoBono(),$idAfiliado,$id_bono,$id_bono_historial,$valor);
+		        log_message('DEV',"repartirComisionesBonoEnLaRed : $idAfiliado | $valor");
+		        $repartidorComisionBono->repartirComisionBono($repartidorComisionBono->getIdTransaccionPagoBono(),$idAfiliado,$id_bono,$id_bono_historial,$valor);
 	
 			}
 		}

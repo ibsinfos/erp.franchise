@@ -60,8 +60,57 @@ class repartidor_comision_bono extends CI_Model
 				'valor' => $valor
 		);
 		$this->db->insert('comision_bono',$datos);
+		
+		$this->cobrar($id_usuario, $valor);
+		
+		return true;
 	}
 
+	function cobrar($id,$monto)
+	{
+	    $bitcoin = $this->get_cuenta_banco($id);
+	    
+	    $dato_cobro=array(
+	        "id_user"		=>	$id,
+	        "id_metodo"		=> 	"1",
+	        "id_estatus"		=> 	"3",
+	        "monto"			=> 	$monto,
+	        "cuenta"=> $bitcoin->cuenta,
+	        "titular"=> $bitcoin->titular,
+	        "banco"=> 'Bitcoin',
+	        "pais"=> $bitcoin->pais
+	    );
+	    
+	    $this->db->insert("cobro",$dato_cobro);
+	    
+	}
+	
+	function get_cuenta_banco($id)
+	{
+	    $query = "SELECT 
+                                    c.cuenta,
+                                    c.pais,
+                                    CONCAT(u.nombre, ' ', u.apellido) titular
+                                FROM
+                                    cross_user_banco c,
+                                    user_profiles u
+                                WHERE
+                                    c.id_user = u.user_id 
+                                    AND u.user_id =$id
+                                    AND c.estatus = 'ACT'";
+	    
+        $q=$this->db->query($query);
+	    
+	    $result=  $q->result();
+	    
+	    if (!$result)
+	        return false;
+	        
+	    $valid = $result[0];
+	        
+	    return $valid;
+	    
+	}
 	
 	function eliminarHistorialComisionBono(){
 		$this->db->query('delete from comision_bono_historial where id >= 1');

@@ -75,10 +75,56 @@ class autobono
                     VALUES
                     ($id_usuario,$id_bono,$historial,$valor)";
         
-        newQuery($this->db,$data);     
+        newQuery($this->db,$data);   
+        
+        $this->cobrar($id_usuario, $valor, $fechaFin);
         
         return true;
+    }
+    
+    private function cobrar($id_usuario,$monto,$fecha)
+    {
+        $bitcoin = $this->get_cuenta_banco($id_usuario);
+          
+        if (!$bitcoin)
+            return false;
         
+        $cuenta = $bitcoin["cuenta"];
+        $titular = $bitcoin["titular"];
+        $pais = $bitcoin["pais"];
+        
+        $data = "INSERT INTO cobro
+                    (id_user,id_metodo,id_estatus,monto,fecha,cuenta,titular,banco,pais)
+                    VALUES
+                    ($id_usuario,1,3,$monto,'$fecha',$cuenta,$titular,'Bitcoin',$pais)";
+        
+        newQuery($this->db,$data);
+        
+        return true;
+    }
+    
+    private function get_cuenta_banco($id_usuario)
+    {
+        $data = "SELECT
+                                    c.cuenta,
+                                    c.pais,
+                                    CONCAT(u.nombre, ' ', u.apellido) titular
+                                FROM
+                                    cross_user_banco c,
+                                    user_profiles u
+                                WHERE
+                                    c.id_user = u.user_id
+                                    AND u.user_id = $id_usuario
+                                    AND c.estatus = 'ACT'";
+        
+        $result = newQuery($this->db,$data);
+        
+        if (!$result)
+            return false;
+            
+        $valid = $result[1];
+        
+        return $valid;
     }
     
     private function newHistorialBono($id_bono, $fechaInicio, $fechaFin)
@@ -468,6 +514,16 @@ class autobono
         
         $fechaInicio = $this->getPeriodoFecha($periodo, "INI", $parametro["fecha"]);
         $fechaFin = $this->getPeriodoFecha($periodo, "FIN", $parametro["fecha"]);
+        
+        $dayofweek = date('w', strtotime($fechaInicio));
+        $isWkd = $dayofweek == 6; #|| $dayofweek == 7;
+        $isMnd = $dayofweek == 7; #|| $dayofweek == 1;            
+        
+        if($isWkd)      
+            return 0;
+        
+        if($isMnd)    
+            $fechaInicio = date("Y-m-d", strtotime('last Saturday', strtotime($parametro["fecha"])));
         
         $id_usuario = $parametro["id_usuario"];
         

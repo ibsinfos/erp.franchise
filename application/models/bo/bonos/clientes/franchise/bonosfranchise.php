@@ -61,7 +61,101 @@ class bonosfranchise extends CI_Model
         $Pasa = ($inversion&&$patas) ? true : false;
         
         return $Pasa;
-         
+     }
+
+     function membresiaTitulo($id_usuario, $red = 1)
+    {      
+        $isActived = $this->isActivedAfiliado($id_usuario, $red);
+        
+        if(!$isActived){
+            return 'Desactivada';
+        }
+        
+        $membresia = $this->getLastMembresia($id_usuario);  
+        
+        if(!$membresia)
+            return 'Desactivada';
+        
+        $membresia = $membresia->item;
+        
+        return $membresia;
+        
+    }   
+    
+    function estadistica($id_usuario, $red = 1)
+    {
+        
+        $estadistica = array();       
+        
+        $isActived = $this->isActivedAfiliado($id_usuario, $red);
+        
+        if(!$isActived){
+            return false;
+        }
+        
+        $membresia = $this->getLastMembresia($id_usuario);
+        
+        if(!$membresia)
+            return false;                
+        
+        $paquete = array(
+            "nombre" => $membresia->item,
+            "costo" => $membresia->costo
+        );
+            
+        $estadistica["membresia"] = $paquete;   
+        
+        $acumulado = $this->getGananciaBono($id_usuario,0,$membresia->fecha,$this->fechaFin);
+        
+        if(!$acumulado)
+            return false; 
+        
+        $per = 100/$membresia->costo;   
+            
+        $ganancia = round($acumulado*$per);
+        
+        $compensacion = array(
+                "valor" => $ganancia,
+                "rango" => $ganancia/2
+        );        
+        
+        $estadistica["compensacion"] = $compensacion;   
+        
+        $per = $ganancia-50; 
+        
+        if($per<0)
+            $per = 0;
+        
+        $falta = 50 - $per;
+        
+        $duplicado = array(
+                "valor" => $falta*2,
+                "rango" => $per*2
+        );
+        
+        $estadistica["duplicado"] = $duplicado;  
+        
+        return $estadistica;
+            
+    }   
+    
+    private function getDatoMembresia($id)
+    {
+        $query = "SELECT 
+                        *
+                    FROM
+                        items 
+                        WHERE id = $id";
+        
+        $q = $this->db->query($query);
+        $q = $q->result();
+        
+        if (!$q)
+            return false;
+            
+        $valid = $q[0]->item;
+            
+        return $valid;
     }
     
     private function isActivedbyPatas($id_usuario){
@@ -148,7 +242,7 @@ class bonosfranchise extends CI_Model
         }
         
         if($fecha){
-            $select = "v.id_venta,group_concat(c.id_mercancia) mercancia,m.costo,v.fecha";
+            $select = "v.id_venta,group_concat(c.id_mercancia) mercancia,m.costo,v.fecha,i.item";
             $where.= " AND v.fecha = '$fecha'";            
         }
         
@@ -182,8 +276,11 @@ class bonosfranchise extends CI_Model
 
     private function getGananciaBono($id_usuario,$id_bono = 0,$fechaInicio = '',$fechaFin = ''){
      
-        if(!$fechaInicio||!$fechaFin){
+        if(!$fechaInicio){
             $fechaInicio = $this->getPeriodoFecha("DIA", "INI", '');
+        }
+        
+        if(!$fechaFin){
             $fechaFin = $this->getPeriodoFecha("DIA", "FIN", '');
         }
         
@@ -353,6 +450,16 @@ class bonosfranchise extends CI_Model
         $fechaInicio=$this->getPeriodoFecha($periodo, "INI", $parametro["fecha"]);
         $fechaFin=$this->getPeriodoFecha($periodo, "FIN", $parametro["fecha"]); 
         
+        $dayofweek = date('w', strtotime($fechaInicio));
+        $isWkd = $dayofweek == 6 || $dayofweek == 7;
+        $isMnd = $dayofweek == 1; #|| $dayofweek == 7;
+       
+        if($isMnd)
+            $fechaInicio = date("Y-m-d", strtotime('last Saturday', strtotime($parametro["fecha"])));
+               
+        if($isWkd)
+            return 0;    
+            
         $id_usuario = $parametro["id_usuario"];
         
         $valor = $this->getValorPataDebil($id_usuario,$fechaInicio,$fechaFin);
@@ -564,7 +671,7 @@ class bonosfranchise extends CI_Model
         }
         
         if ($frecuencia == "DIA") {
-            return ($tipo == "INI") ? date('Y-m-d') : date('Y-m-d')." 23:59:59";;
+            return ($tipo == "INI") ? $fecha : $fecha." 23:59:59";
         }
         
         if (! isset($periodoFecha[$frecuencia]) || ! isset($tipoFecha[$tipo])) {
