@@ -3440,10 +3440,12 @@ function index()
 			$puntos_comisionables = ($mercancia[$i]->puntos_comisionables!='0') 
 				? '<span style="font-size: 1.5rem;">(Puntos  '.$mercancia[$i]->puntos_comisionables.')</span>' : '';
 				
-			$img_item = $mercancia[$i]->img;
+				$img_item = ($tipoMercancia < 5) ? $mercancia[$i]->img : "/media/carrito/".strtolower($mercancia[$i]->nombre).".jpg";
 			
 			if(!file_exists(getcwd().$img_item))
 				$img_item = "/template/img/favicon/favicon.png";
+			
+			$printPuntos = ($tipoMercancia < 5) ? '<div class="price">'.$puntos_comisionables.'<br>' : '';	
 
 		$imprimir ='	<div class="item col-lg-3 col-md-3 col-sm-3 col-xs-3">
 					<div class="producto">
@@ -3467,8 +3469,8 @@ function index()
 					<span>'.$inventario.'</span>
 					</div>
 					<hr/>
-					<div class="price">'.$puntos_comisionables.'<br>
-					<span>'.$mercancia[$i]->costo.' <i class="fa fa-bitcoin"></i></span>
+					'.$printPuntos.'
+					<span style="font-size: 2rem;">'.$mercancia[$i]->costo.' <i class="fa fa-bitcoin"></i></span>
 					</div>
 					<br>
 					<div class=""> 

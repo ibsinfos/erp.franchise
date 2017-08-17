@@ -232,51 +232,11 @@
 					<!-- end widget div -->
 					
 				</div>
-				<div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
-					<header>
-						<span class="widget-icon"> <i class="fa fa-arrows-v"></i> </span>
-						<h2 class="font-md"><i>Tipos de Mercancia</i></h2>				
-					</header>
-
-					<!-- widget div-->
-					<div>
-						
-						<!-- widget edit box -->
-						<div class="jarviswidget-editbox">
-							<!-- This area used as dropdown edit box -->
-
-						</div>
-						<!-- end widget edit box -->
-						
-						<!-- widget content -->
-						<div class="widget-body">
-								<h3>Tipos Mercancia</h3>
-								<div class="dropdown">
-								<?php 
-
-								foreach ($tiposMercancia as $key => $value) {
-      									echo ' <a id="dLabel" style="background:'.$style[0]->btn_1_color.' !important" role="button" data-toggle="dropdown" class="btn btn-primary btn-block" data-toggle="dropdown" class="dropdown-toggle"
-      										 onclick="show_todos_tipo_mercancia('.$key.')"> '.$value.' </a>';
-      							}	
-
-      							?>
-								</div>
-								<br>
-						</div>
-						<!-- end widget content -->
-						
-					</div>
-					<!-- end widget div -->
-					
-				</div>
+				
 				<!-- end widget -->
 				<div class="paymentMethodImg"> 
 				<h3>Métodos de pago</h3>
-					<img src="/template/img/payment/payu.jpg" alt="img" height="50"> 
-					<img src="/template/img/payment/master_card.png" alt="img" height="30"> 
-					<img src="/template/img/payment/paypal.png" alt="img" height="30"> 
-					<img src="/template/img/payment/american_express_card.png" alt="img" height="30"> 
-					<img src="/template/img/payment/discover_network_card.png" alt="img" height="30">  
+					<img src="/template/img/payment/bitcoin.png" alt="img" height="100"> 
 				</div>
 </article>
 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
@@ -385,6 +345,11 @@
 <!--<script src="/template/js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>  -->
 <script src="/template/js/plugin/fuelux/wizard/wizard.min.js"></script>
 <script type="text/javascript">
+
+$(document).ready(function() {
+	show_todos_categoria(1);
+});
+
 			function detalles(id,tipo)
 			{
 				var datos={'id':id,'tipo':tipo};

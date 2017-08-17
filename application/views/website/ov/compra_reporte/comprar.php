@@ -10,16 +10,24 @@
 
 <!-- styles needed by checkRadio -->
 <link href="/cart/HTML/assets/css/ion.checkRadio.css" rel="stylesheet">
-<link href="/cart/HTML/assets/css/ion.checkRadio.cloudy.css" rel="stylesheet">
+<link href="/cart/HTML/assets/css/ion.checkRadio.cloudy.css"
+	rel="stylesheet">
 
 <!-- styles needed by mCustomScrollbar -->
-<link href="/cart/HTML/assets/css/jquery.mCustomScrollbar.css" rel="stylesheet">
-<div id="content" class="container main-container" style="background-color: #fff;min-height: auto ! important;padding-top: 5rem;padding-bottom: 10rem;"> 
-<div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation" id="cart_cont" style="background: #2980b9 ! important;">
-    <div class="navbar-header">
-      <a style="color : #fff;margin-left:4rem;" class="navbar-brand titulo_carrito" href="/ov/compras/carrito"> <i class="fa fa-arrow-circle-left"></i> Atras &nbsp;</a> 
-      
-      <!-- this part for mobile -
+<link href="/cart/HTML/assets/css/jquery.mCustomScrollbar.css"
+	rel="stylesheet">
+<div id="content" class="container main-container"
+	style="background-color: #fff; min-height: auto ! important; padding-top: 5rem; padding-bottom: 10rem;">
+	<div class="navbar navbar-tshop navbar-fixed-top megamenu"
+		role="navigation" id="cart_cont"
+		style="background: #2980b9 ! important;">
+		<div class="navbar-header">
+			<a style="color: #fff; margin-left: 4rem;"
+				class="navbar-brand titulo_carrito" href="/ov/compras/carrito"> <i
+				class="fa fa-arrow-circle-left"></i> Atras &nbsp;
+			</a>
+
+			<!-- this part for mobile -
       <div class="search-box pull-right hidden-lg hidden-md hidden-sm">
         <div class="input-group">
           <button class="btn btn-nobg getFullSearch" type="button"> <i class="fa fa-search"> </i> </button>
@@ -27,189 +35,161 @@
         <! /input-group >
         
       </div> -->
-    </div>
-    
-    <!-- this part is duplicate from cartMenu  keep it for mobile -->
-    <div class="navbar-cart  collapse">
-      <!--/.cartMenu--> 
-    </div>
-    <!--/.navbar-cart-->
-    
-    <div class="navbar-collapse collapse">
-    </div>
-    <!--/.nav-collapse --> 
-</div>
-<div class="padding-10">
+		</div>
 
-<div class="row">
+		<!-- this part is duplicate from cartMenu  keep it for mobile -->
+		<div class="navbar-cart  collapse">
+			<!--/.cartMenu-->
+		</div>
+		<!--/.navbar-cart-->
 
-<div class="pull-left">
-	
-	<img style="height: 8em;  padding: 1rem;" src="/logo.png" alt="">
+		<div class="navbar-collapse collapse"></div>
+		<!--/.nav-collapse -->
+	</div>
+	<div class="padding-10">
 
-</div>
+		<div class="row">
 
-<div class="pull-right">
-	
-	<h1 class="font-400">Recibo de pago</h1>
-</div>
+			<div class="pull-left">
 
-
-</div>
-
-
-
-<div class="row">
-	
-	<div class="col-sm-4">
-												
+				<img style="height: 8em; padding: 1rem;" src="/logo.png" alt="">
 				
-												<address>
-													<h4 class="semi-bold"><?=$empresa[0]->nombre?></h4>
-													<abbr title="Phone">Identificador tributario:</abbr><?="\t".$empresa[0]->id_tributaria?>
-													<br>
-													<abbr title="Phone">Dirección:</abbr><?=$empresa[0]->direccion?>
-													<br>
-													<abbr title="Phone">Ciudad:</abbr><?=$empresa[0]->ciudad?>
-													<br>
-													<abbr title="Phone">Tel:</abbr>&nbsp;<?=$empresa[0]->fijo?>
-												</address>
-											</div>
-											<div class="col-sm-4">
-													<address>
-														<strong>Facturar a:</strong>
-														<br>
-														<strong>Señor (a). <?php echo $datos_afiliado[0]->nombre." ".$datos_afiliado[0]->apellido;?></strong>
-														<br>
-														<abbr title="Phone">Número de identificación:</abbr> <?php echo $datos_afiliado[0]->keyword;?>
-														<br>
-														<abbr title="Phone">Dirección:</abbr> <?php echo $pais_afiliado[0]->direccion;?>
-														<br>
-														<abbr title="Phone">País:</abbr> <?php echo $pais_afiliado[0]->nombrePais;?> <img class="flag flag-<?=strtolower($pais_afiliado[0]->codigo)?>">
-														<br>
-														<abbr title="Phone">Email:</abbr> <?php echo $datos_afiliado[0]->email;?>
-													</address>
-												</div>
-											<div class="col-sm-4">
-												
+			</div>
+
+			<div class="pull-right">
+
+				<h1 class="font-400">Recibo de pago</h1>
+				<br/>
+				<a href="mailto:soporte@franchiseone.net">soporte@franchiseone.net</a>
+			</div>
 
 
-													<div>
-														<div class="font-md">
-
-															<abbr title="Phone"><strong>Fecha de expedición:</strong></abbr><span class="pull-right"> <i></i> <?php echo date("Y-m-d");?> </span>
-															<br>
-															<br>
-															<abbr title="Phone"><strong>Fecha de vencimiento:</strong></abbr><span class="pull-right"> <i></i> <?php echo date("Y-m-d");?> </span>
-														</div>
-				
-													</div>
-													<hr class="col-md-12" />
-													<div class="col-md-12 well well-sm  bg-color-darken txt-color-white no-border">
-														<div class="fa-lg">
-															Precio :
-															<span class="pull-right"> <?php echo $this->cart->total(); ?> <i class="fa fa-bitcoin"></i> </span>
-														</div>
-													</div>
-													<div class="col-md-12 well well-sm  bg-color-green txt-color-white no-border">
-														<div class="fa-lg">
-															Puntos :
-															<span class="pull-right"><?php echo $puntos; ?> ** </span>
-														</div>
-													</div>
-												</div>
+		</div>
 
 
-</div>
-											
-											<div class="clearfix"></div>
-											<br>
-											<div class="row">
-												
-												
-											</div>
-																							<div class="panel panel-default">
-  													<div class="panel-body">
-														<span class="center"> <?php echo $empresa[0]->resolucion;?> </span>
-  													</div>
-												</div>
-											<table class="table table-hover">
-												<thead>
-													<tr>
-														<th class="text-center">Cantidad</th>
-														<th>ITEM</th>
-														<th>DESCRIPCION</th>
-														<th>PUNTOS</th>
-														<th>PRECIO</th>
-														<th>IMPUESTO</th>
-														<th>SUBTOTAL</th>
-														<th></th>
-													</tr>
-												</thead>
-												<tbody>
+
+		<div class="row">
+		
+		
+<hr class="col-md-11" />
+
+
+
+
+
+			
+
+<div class="col-md-8">
+
+
+				<address>
+					<strong>Facturar a:</strong> <br> <strong>Señor (a). <?php echo $datos_afiliado[0]->nombre." ".$datos_afiliado[0]->apellido;?></strong>
+
+				</address>
+			</div>
+
+
+			
+<div class="col-md-4">
+
+
+
+				<div>
+					<div class="font-md">
+
+						<abbr title="Phone"><strong>Fecha de expedición:</strong></abbr><span
+							class="pull-right"> <i></i> <?php echo date("Y-m-d");?> </span> <br>
+						<br> <abbr title="Phone"><strong>Fecha de vencimiento:</strong></abbr><span
+							class="pull-right"> <i></i> <?php echo date("Y-m-d");?> </span>
+					</div>
+
+				</div>
+
+			</div>
+
+
+		</div>
+
+		<div class="clearfix"></div>
+		<br>
+		<div class="row"></div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<span class="center"> <?php echo $empresa[0]->resolucion;?> </span>
+			</div>
+		</div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="text-center">Cantidad</th>
+					<th>ITEM</th>
+					<th>DESCRIPCION</th>
+					<th>PUNTOS</th>
+					<th>PRECIO</th>
+					<th>IMPUESTO</th>
+					<th>SUBTOTAL</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
 												 <?php
-												 
-												 $contador=0;
-												 $total=0;
-												 
-								                  	if($this->cart->contents())
-													{
-														foreach ($this->cart->contents() as $items) 
-														{
-														
-															
-															$costoImpuesto=0;
-															$nombreImpuestos="";
-															$precioUnidad=0;
-															$cantidad=$items['qty'];
-															
-															$precioUnidad=$compras[$contador]['costos'][0]->costo;
-															
-															foreach ($compras[$contador]['costos'] as $impuesto){
-																$costoImpuesto+=$impuesto->costoImpuesto;
-																$nombreImpuestos.="".$impuesto->nombreImpuesto."<br>";
-															}
-															
-															if($compras[$contador]['costos'][0]->iva!='MAS'){
-																$precioUnidad-=$costoImpuesto;
-															}
-
-															$img_item = $compras[$contador]['imagen'];
-															
-															if(!file_exists(getcwd().$img_item))
-																$img_item = "/template/img/favicon/favicon.png";
-															
-															$descripcion_item = $compras[$contador]['descripcion'];
-															
-															if(strlen($descripcion_item)>125) 
-																$descripcion_item = substr($descripcion_item, 0,125)."...";
-															
-															echo '<tr> 
-																	<td class="text-center"><strong>'.$items['qty'].'</strong></td>
-																	<td class="miniCartProductThumb"><img style="width: 8rem;" src="'.$img_item.'" alt="img"><br/>'
-																			.$compras[$contador]['nombre'].'</td>
-																	<td style="max-width: 25rem;"><a  title="'.$compras[$contador]['descripcion'].'");">'.$descripcion_item.'</a></td>
+            
+            $contador = 0;
+            $total = 0;
+            
+            if ($this->cart->contents()) {
+                foreach ($this->cart->contents() as $items) {
+                    
+                    $costoImpuesto = 0;
+                    $nombreImpuestos = "";
+                    $precioUnidad = 0;
+                    $cantidad = $items['qty'];
+                    
+                    $precioUnidad = $compras[$contador]['costos'][0]->costo;
+                    
+                    foreach ($compras[$contador]['costos'] as $impuesto) {
+                        $costoImpuesto += $impuesto->costoImpuesto;
+                        $nombreImpuestos .= "" . $impuesto->nombreImpuesto . "<br>";
+                    }
+                    
+                    if ($compras[$contador]['costos'][0]->iva != 'MAS') {
+                        $precioUnidad -= $costoImpuesto;
+                    }
+                    
+                    $img_item = $compras[$contador]['imagen'];
+                    
+                    if (! file_exists(getcwd() . $img_item))
+                        $img_item = "/template/img/favicon/favicon.png";
+                    
+                    $descripcion_item = $compras[$contador]['descripcion'];
+                    
+                    if (strlen($descripcion_item) > 125)
+                        $descripcion_item = substr($descripcion_item, 0, 125) . "...";
+                    
+                    echo '<tr> 
+																	<td class="text-center"><strong>' . $items['qty'] . '</strong></td>
+																	<td class="miniCartProductThumb"><img style="width: 8rem;" src="' . $img_item . '" alt="img"><br/>' . $compras[$contador]['nombre'] . '</td>
+																	<td style="max-width: 25rem;"><a  title="' . $compras[$contador]['descripcion'] . '");">' . $descripcion_item . '</a></td>
 																	<td>
-												                        <span> '.($compras[$contador]['puntos']*$cantidad).' </span>
+												                        <span> ' . ($compras[$contador]['puntos'] * $cantidad) . ' </span>
 																	</td>
       																<td>
-												                        <span> '.($precioUnidad*$cantidad).'  <i class="fa fa-bitcoin"></i> </span>
+												                        <span> ' . ($precioUnidad * $cantidad) . '  <i class="fa fa-bitcoin"></i> </span>
 																	</td>
 																	<td>
-																	'.($costoImpuesto*$cantidad).' <i class="fa fa-bitcoin"></i> 
-        															<br>'.$nombreImpuestos.'
+																	' . ($costoImpuesto * $cantidad) . ' <i class="fa fa-bitcoin"></i> 
+        															<br>' . $nombreImpuestos . '
       																<br>
 																	</td>
-																	<td><strong>'.number_format(($precioUnidad*$cantidad)+($costoImpuesto*$cantidad),2).' <i class="fa fa-bitcoin"></i></strong></td>
-												                    <td  style="width:5%" class="delete"><a onclick="quitar_producto(\''.$items['rowid'].'\')"> <i class="txt-color-red fa fa-trash-o fa-3x "></i> </a></td>
-																</tr>'; 
-														$total+=round(($precioUnidad*$cantidad)+($costoImpuesto*$cantidad),2);
-														$contador++;
-														} 
-														
-													}
-								                  
-								                   ?>
+																	<td><strong>' . number_format(($precioUnidad * $cantidad) + ($costoImpuesto * $cantidad), 2) . ' <i class="fa fa-bitcoin"></i></strong></td>
+												                    <td  style="width:5%" class="delete"><a onclick="quitar_producto(\'' . $items['rowid'] . '\')"> <i class="txt-color-red fa fa-trash-o fa-3x "></i> </a></td>
+																</tr>';
+                    $total += round(($precioUnidad * $cantidad) + ($costoImpuesto * $cantidad), 2);
+                    $contador ++;
+                }
+            }
+            
+            ?>
 											<!--	<tr>
 														<td></td>
 														<td></td>
@@ -224,43 +204,55 @@
 														<td colspan="2">HST/GST</td>
 														<td><strong>13%</strong></td>
 													</tr>   -->
-												</tbody>
-											</table>
-															<div class="panel panel-default">
-  												<div class="panel-body">
-													<abbr title="Phone">Observaciones:</abbr><span class="center"> <?php echo $empresa[0]->comentarios;?> </span>
-  												</div>
-											</div>
-											<div class="invoice-footer">
-				
-												<div class="row">
-				
-													<div class="col-sm-8">
+			</tbody>
+		</table>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<abbr title="Phone">Observaciones:</abbr><span class="center"> <?php echo $empresa[0]->comentarios;?> </span>
+			</div>
+		</div>
+		<div class="invoice-footer">
 
-													<p class="note">**Para evitar cargos por exceso de penalización , por favor, hacer pagos dentro de los 30 días siguientes a la fecha de vencimiento. Habrá un cargo de interés del 2 % mensual sobre todas las facturas finales.</p>
-														
-													</div>
-													
-													<div class="col-sm-4">
-														<div class="invoice-sum-total pull-right">													
-															<h3><strong>Total a Pagar: <span class="text-success pull-right">&nbsp;&nbsp;<?php echo $total;?>  <i class="fa fa-bitcoin"></i> </span></strong></h3>
-														</div>
-													</div>
-				
-												</div>
-												
-												<div class="row">
-													<div class="col-sm-12">
-														<div class="payment-methods pull-right">
-															<a onclick="consignacion()" style="margin-left: 1rem;font-size: 32px" class="btn btn-success"><strong>Confirmar</strong></a>
-															
-														</div>
-													</div>
-												</div>
-				
-											</div>
+			<div class="row">
 
-										</div>
+				<div class="col-sm-8">
+
+					<p class="note">**Para evitar cargos por exceso de penalización ,
+						por favor, hacer pagos dentro de los 30 días siguientes a la
+						fecha de vencimiento. Habrá un cargo de interés del 2 % mensual
+						sobre todas las facturas finales.</p>
+
+				</div>
+
+				<div class="col-sm-4">
+					<div class="invoice-sum-total pull-right">
+						
+				<div class="col-md-12 well well-sm  bg-color-green txt-color-white no-border">
+					<div class="fa-lg">
+						<h3 style="padding: 0">Total a pagar : <strong> <?php echo $total; ?> </strong><i
+							class="fa fa-bitcoin"></i></h3>
+					</div>
+				</div>
+					
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="payment-methods pull-right">
+						<a onclick="consignacion()"
+							style="margin-left: 1rem; font-size: 32px"
+							class="btn btn-success"><strong>Confirmar</strong></a>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
 </div>
 
 <script>

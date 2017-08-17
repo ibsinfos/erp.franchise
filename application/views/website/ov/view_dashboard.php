@@ -7,10 +7,7 @@ $ci->load->model("model_permissions");
 <div id="content">
 
 	<!-- row -->
-	<div class="row">
-		<br />
-		<br />
-		<br />
+	<div class="row">	
 	</div>
 	<!-- end row -->
 	<div class="row">
@@ -57,11 +54,6 @@ $ci->load->model("model_permissions");
 											</h1>
 
 											<ul class="list-unstyled ">
-												<li>
-													<div class="demo-icon-font">
-														<img class="flag flag-<?=strtolower($pais)?>">
-													</div>
-												</li>
 												<li>
 													<p class="text-muted">
 														<i class="fa fa-phone"></i>&nbsp;&nbsp;(<span
@@ -166,15 +158,60 @@ if ($id_sponsor && $name_sponsor) {
 							style="box-shadow: 0px 0px 0px !important; border-color: transparent;">
 
 							<fieldset class="row">
+							
+							
+							<?php if ($titulo != NULL) {
+							    
+							    function imgtocolor($img,$x=1,$y=1,$per = false){
+							        
+							        $img = getcwd().$img;							        							       
+							        
+							        if($per){ 
+							            $size = getimagesize($img);
+							            $x*= ($size[0]/100);
+							            $y*= ($size[1]/100);
+							        }							            
+							        
+							        $im = imagecreatefromjpeg($img);
+							        $rgb = imagecolorat($im, $x, $y);
+							        $r = ($rgb >> 16) & 0xFF;
+							        $g = ($rgb >> 8) & 0xFF; 
+							        $b = $rgb & 0xFF;
+							        
+							        return "rgb($r, $g ,$b)";
+							    }
+							    
+							    $img_titulo =  "/media/carrito/".strtolower($titulo).".jpg";							    							    
+							    
+							    $colortitulo = imgtocolor($img_titulo);
+							    $colortext = imgtocolor($img_titulo,25,50,true);
+							    
+							    ?>
+							    <div  class="row well" style="background: <?=$colortitulo;?> ;padding:0">
+							
+							<div class="col-lg-9">
+							
+							<b class="text-center" style="color: <?=$colortext;?>" >MEMBRESIA: </b> 
+							<h2 style="margin:0;padding:0"><strong class="" style="font-size: 2em;color: <?=$colortext;?>"><?=$titulo?> </strong>  </h2>
+							
+							</div>
+							
+							<div class="col-lg-3 text-right"  style="padding:0">					
+			
+					
+                               <img src="<?=$img_titulo?>" width="80"/>
+                            					
+                               </div>
+                               
+                               </div>
+                            	  	 
+    			<?php } ?>
+							
+							
 
-								<div class="pull-right">									
-									<?php if ($titulo != NULL) { ?>
-       <h3> MEMBRESIA :  <strong class="label label-primary" style="font-size: 2rem;"> <i class="fa fa-bitcoin"> | </i> <?=$titulo?></strong>
-    			</h3> <?php } ?>
-    			</div>
 							</fieldset>
 
-							<fieldset>
+							<fieldset class="row">
 								<legend>
 									<b>Muro</b>
 								</legend>
@@ -347,16 +384,15 @@ if ($id_sponsor && $name_sponsor) {
 																	<?php
                 foreach ($cuentasPorPagar as $cuenta) {
                     echo '<li class="message">
-																		<img src="/template/img/notificaciones/icon-deuda.png" style="width: 5rem;" class="online" alt="">
-																		<div class="message-text">
+																		<img src="/template/img/notificaciones/cartera.png" style="width: 10rem;" class="online" alt="">
+																		<div class="message-text"  style="margin-left: 10rem;">
 																			<time>
 																				' . $cuenta->fecha . '
 																			</time> 
 																				<a href="/ov/cabecera/email" class="username">Enviar Comprobante de Pago</a>
-																				<br>
-																				<span>Realizar la consignacion bancaria a </span><br>
-																				<span>Banco  : <b>' . $cuenta->nombreBanco . '</b>,</span><br> 
-																				<span>Cuenta : <b>' . $cuenta->cuenta . '</b>,</span><br>
+																				<h5>Realizar el deposito de Bitcoin</h5>
+																				<span>Membresia  : <b>' . $cuenta->nombreBanco . '</b>,</span><br> 
+																				<span>Billetera : <b>' . $cuenta->cuenta . '</b>,</span><br>
 																		';
                     if ($cuenta->otro)
                         echo '<span>Titular:	<b>' . $cuenta->otro . '</b>,</span><br>';
@@ -367,6 +403,7 @@ if ($id_sponsor && $name_sponsor) {
                     if ($cuenta->dir_postal)
                         echo '<span>Dirección postal  :<b>' . $cuenta->dir_postal . '</b>,</span><br>';
                     echo '<span>Valor:	<b>' . $cuenta->valor . ' <i class="fa fa-bitcoin"></i> </b>,</span>
+                            <br/><em> Envíe dirección de vínculo de transacción de Bitcoin para activar su cuenta</em>
 																		</div>
 																	</li>';
                 }

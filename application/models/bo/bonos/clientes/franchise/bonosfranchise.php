@@ -68,13 +68,13 @@ class bonosfranchise extends CI_Model
         $isActived = $this->isActivedAfiliado($id_usuario, $red);
         
         if(!$isActived){
-            return 'Desactivada';
+            return NULL;
         }
         
         $membresia = $this->getLastMembresia($id_usuario);  
         
         if(!$membresia)
-            return 'Desactivada';
+            return NULL;
         
         $membresia = $membresia->item;
         
@@ -242,8 +242,8 @@ class bonosfranchise extends CI_Model
         }
         
         if($fecha){
-            $select = "v.id_venta,group_concat(c.id_mercancia) mercancia,m.costo,v.fecha,i.item";
-            $where.= " AND v.fecha = '$fecha'";            
+            $select = "v.id_venta,c.id_mercancia mercancia,m.costo,v.fecha,i.item";
+            $where.= " AND v.fecha = '$fecha' ORDER BY v.id_venta desc";            
         }
         
         $query = "SELECT 

@@ -3,19 +3,19 @@
 if (isset($banco[0]->id_banco)) {
     ?><div class="jumbotron">
 	<h1>Felicitaciones!</h1>
-	<p>La transacción ha finalizado con éxito.</p>
+	<p>La transaccion ha finalizado con Exito.</p>
 	<p class="text-danger">
-		Para terminar tu compra debes enviar un correo electrónico con el
-		comprobante de pago al departamento de Pagos(<b><?=$emailPagos[0]->email?></b>)
+		Para terminar, Envie direccion de vinculo de transaccion de Bitcoin 
+		al departamento de Pagos(<b><?=$emailPagos[0]->email?></b>)
 	</p>
 	<p></p>
 	<div class="alert alert-success alert-block">
 		<p>
-			<b>Nombre de Banco</b> : <?=$banco[0]->descripcion?></p>
+			<b>Membresia</b> : <?=$banco[0]->descripcion?></p>
 		<p>
-			<b>Numero de Cuenta</b>: <?=$banco[0]->cuenta?></p>
+			<b>Billetera</b>: <?=$banco[0]->cuenta?></p>
 			<?php
-    
+     
     if ($banco[0]->swift) {
         ?>
 				<p>

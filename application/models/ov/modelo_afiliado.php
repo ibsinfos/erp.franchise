@@ -256,7 +256,7 @@ class modelo_afiliado extends CI_Model{
 			/*"colonia"   => */$_POST['colonia'],
 			/*"municipio" => */$_POST['municipio'],
 			/*"estado"    => */$_POST['estado'],
-			/*"pais"      => */$_POST['pais']
+			/*"pais"      => */'BOL' #$_POST['pais']
 			);
 		#$this->db->insert("cross_dir_user",$dato_dir);
 		return $dato_dir;#true;
