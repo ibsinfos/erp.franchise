@@ -1024,9 +1024,9 @@ function chat_soporte(){
 			header("Refresh:0;url='/bo/configuracion/chat_soporte?id_red=".$red_temporal."'");
 		}
 		
-		include_once("cometchat/model_soporte_chat.php");
-		$chat_r=new Red_chat;
-		$chat_r->soporte_red();
+		#include_once("cometchat/model_soporte_chat.php");
+		#$chat_r=new Red_chat;
+		#$chat_r->soporte_red();
 
 		
 		
