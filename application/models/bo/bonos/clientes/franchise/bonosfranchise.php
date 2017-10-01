@@ -451,7 +451,7 @@ class bonosfranchise extends CI_Model
         $fechaFin=$this->getPeriodoFecha($periodo, "FIN", $parametro["fecha"]); 
         
         $dayofweek = date('w', strtotime($fechaInicio));
-        $isWkd = $dayofweek == 6 || $dayofweek == 7;
+        $isWkd = $dayofweek == 6 || $dayofweek == 0;
         $isMnd = $dayofweek == 1; #|| $dayofweek == 7;
        
         if($isMnd)
