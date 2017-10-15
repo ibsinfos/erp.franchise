@@ -162,9 +162,9 @@ class cgeneral extends CI_Controller
 			header("Refresh:0;url='/ov/cgeneral/chat_soporte?id=red_soporte'");
 		}
 	
-		include_once("cometchat/model_soporte_chat.php");
-		$chat_r=new Red_chat;
-		$chat_r->red_soporte();
+		#include_once("cometchat/model_soporte_chat.php");
+		#$chat_r=new Red_chat;
+		#$chat_r->red_soporte();
 	
 		$id=$this->tank_auth->get_user_id();
 		$style=$this->general->get_style($id);
@@ -192,9 +192,9 @@ class cgeneral extends CI_Controller
 			header("Refresh:0;url='/ov/cgeneral/chat_red?id_red=".$red."'");
 		}	
 
-		include_once("cometchat/model_soporte_chat.php");
-		$chat_r=new Red_chat;
-		$chat_r->red_a_red();
+		#include_once("cometchat/model_soporte_chat.php");
+		#$chat_r=new Red_chat;
+		#$chat_r->red_a_red();
 		 
 		
 	    $id=$this->tank_auth->get_user_id();
