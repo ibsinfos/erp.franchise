@@ -562,7 +562,8 @@ class calculo
             $limite = $nivel;
             return $this->getVentasTodaLaRedEquilibrada($id_afiliado, $red, $tipo, $nivel, $fechaInicio, $fechaFin, $limite, $id_tipo_mercancia, $id_mercancia, $datoVenta);
         } else if ($condicionRed == "DEB") {
-            return $this->getVentasTodaLaRedPataDebil($id_afiliado, $red, $tipo, $nivel, $fechaInicio, $fechaFin, $id_tipo_mercancia, $id_mercancia, $datoVenta)["total"];
+            $getDebil = $this->getVentasTodaLaRedPataDebil($id_afiliado, $red, $tipo, $nivel, $fechaInicio, $fechaFin, $id_tipo_mercancia, $id_mercancia, $datoVenta);
+            return $getDebil ? $getDebil["total"] : 0;
         }
     }
 

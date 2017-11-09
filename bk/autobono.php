@@ -96,7 +96,7 @@ class autobono
         $data = "INSERT INTO cobro
                     (id_user,id_metodo,id_estatus,monto,fecha,cuenta,titular,banco,pais)
                     VALUES
-                    ($id_usuario,1,3,$monto,'$fecha',$cuenta,$titular,'Bitcoin',$pais)";
+                    ($id_usuario,1,3,$monto,'$fecha','$cuenta','$titular','Bitcoin','$pais')";
         
         newQuery($this->db,$data);
         
@@ -411,8 +411,8 @@ class autobono
     {
         $bono = $this->getBono($id_bono);
         
-        $mes_inicio = $bono[0]->mes_desde_afiliacion;
-        $mes_fin = $bono[0]->mes_desde_activacion;
+        $mes_inicio = $bono[1]["mes_desde_afiliacion"];
+        $mes_fin = $bono[1]["mes_desde_activacion"];
         
         if ($mes_inicio <= 0) {
             return true;
@@ -431,13 +431,13 @@ class autobono
 					WHERE
 					    id = " . $id_usuario;
         
-        $q = $this->db->query($query);
-        $q = $q->result();
+        $q = newQuery($this->db,$query);
+        
         
         if (! $q)
             return false;
         
-        $valid = ($q[0]->valid == 1) ? true : false;
+        $valid = ($q[1]["valid"] == 1) ? true : false;
         
         return $valid;
     }
@@ -446,8 +446,8 @@ class autobono
     {
         $bono = $this->getBono($id_bono);
         
-        $mes_inicio = $bono[0]->mes_desde_afiliacion;
-        $mes_fin = $bono[0]->mes_desde_activacion;
+        $mes_inicio = $bono[1]["mes_desde_afiliacion"];
+        $mes_fin = $bono[1]["mes_desde_activacion"];
         $where = "";
         
         if (strlen($fecha) > 2) {
@@ -472,13 +472,13 @@ class autobono
 					WHERE
 					    id = " . $id_usuario . $where;
         
-        $q = $this->db->query($query);
-        $q = $q->result();
+        $q = newQuery($this->db,$query);
+        
         
         if (! $q)
             return false;
         
-        $valid = ($q[0]->valid == 1) ? true : false;
+        $valid = ($q[1]["valid"] == 1) ? true : false;
         
         return $valid;
     }
@@ -640,7 +640,7 @@ class autobono
 							AND a.directo = $id
 							$where";
         
-        $q = $this->db->query($query);
+        $q = newQuery($this->db,$query);
         
         $datos = $q->result();
         
@@ -653,9 +653,9 @@ class autobono
             
             if ($nivel <= 0) {
                 
-                $this->setAfiliados($dato->id);
+                $this->setAfiliados($dato["id"]);
             } else {
-                $this->getDirectosBy($dato->id, $nivel, $where, $red);
+                $this->getDirectosBy($dato["id"], $nivel, $where, $red);
             }
         }
     }
@@ -679,7 +679,7 @@ class autobono
 							AND a.debajo_de = $id
 							$where";
         
-        $q = $this->db->query($query);
+        $q = newQuery($this->db,$query);
         
         $datos = $q->result();
         
@@ -692,19 +692,19 @@ class autobono
             
             if ($nivel <= 0) {
                 
-                if ($tipo != "DIRECTOS" || $padre == $dato->directo) {
-                    $this->setAfiliados($dato->id);
+                if ($tipo != "DIRECTOS" || $padre == $dato["directo"]) {
+                    $this->setAfiliados($dato["id"]);
                 }
             } else {
-                $this->getAfiliadosBy($dato->id, $nivel, $tipo, $where, $padre, $red);
+                $this->getAfiliadosBy($dato["id"], $nivel, $tipo, $where, $padre, $red);
             }
         }
     }
 
     private function getEmpresa($attrib = 0)
     {
-        $q = $this->db->query("SELECT * FROM empresa_multinivel GROUP BY id_tributaria");
-        $q = $q->result();
+        $query = "SELECT * FROM empresa_multinivel GROUP BY id_tributaria";
+        $q = newQuery($this->db,$query);        
         
         if (! $q) {
             return 0;
@@ -714,7 +714,7 @@ class autobono
             return $q;
         }
         
-        return $q[0]->$attrib;
+        return $q[1]["$attrib"];
     }
 
     private function getPeriodoFecha($frecuencia, $tipo, $fecha = '')
@@ -760,8 +760,8 @@ class autobono
                     FROM
                         users";
         
-        $q = $this->db->query($query);
-        $q = $q->result();
+        $q = newQuery($this->db,$query);
+        
         
         $year = new DateTime();
         $year->setDate($year->format('Y'), 1, 1);
@@ -769,7 +769,7 @@ class autobono
         if (! $q)
             date_format($year, 'Y-m-d');
         
-        return $q[0]->fecha;
+        return $q[1]["fecha"];
     }
 
     private function getFinSemana($date)
